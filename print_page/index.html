@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.4">
     
     
       
@@ -1649,6 +1649,9 @@ FIN              0
 </code></pre></div>
 </div>
 <hr />
+<hr />
+<h2 id="clases-05_corte_control-ver-en-python-tutor">🔬 Ver en Python Tutor</h2>
+<p>→ <a href="#pythontutor-pythontutor-corte-de-control">Snippet: corte de control paso a paso</a></p>
 <div class="nav-links">
 <h2 id="clases-05_corte_control-anterior-ir-a-ejercicios"><a href="#clases-04_listas_enlazadas">⬅️ Anterior</a> | <a href="#ejercicios-ejercicios">🏋️ Ir a ejercicios</a></h2>
 </div></section></section><section class="print-page" id="ejercicios-ejercicios" heading-number="3"><h1 id="ejercicios-ejercicios-ejercicios">🏋️ Ejercicios</h1>
@@ -2127,6 +2130,84 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 Pascal: lista (sin var)       →  C: struct Nodo*  lista
 </code></pre></div>
 En <code>insertarDespuesDe</code> la cabecera no cambia, así que en C alcanza con <code>struct Nodo*</code> (un solo nivel de indirección).</p>
+</div>
+<hr />
+<h2 id="pythontutor-pythontutor-corte-de-control">Corte de Control</h2>
+<p>Los datos están <strong>hardcodeados en un array</strong> para poder steppear sin tener que ingresar input.
+Pegá el código en <a href="https://pythontutor.com/c.html">pythontutor.com/c.html</a> y avanzá de a un paso.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Equivalente Pascal:</span>
+<span class="cm"> *   while localidad &lt;&gt; &#39;FIN&#39; do</span>
+<span class="cm"> *     if localidad = localidadActual then acumular</span>
+<span class="cm"> *     else informar + reiniciar</span>
+<span class="cm"> *   { informar último grupo }</span>
+<span class="cm"> */</span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">localidad</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">precio</span><span class="p">;</span>
+<span class="p">}</span><span class="w"> </span><span class="n">Inmueble</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Datos ordenados por localidad — simulan la entrada del programa */</span>
+<span class="w">    </span><span class="n">Inmueble</span><span class="w"> </span><span class="n">datos</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;La Plata&quot;</span><span class="p">,</span><span class="w">  </span><span class="mi">150000</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;La Plata&quot;</span><span class="p">,</span><span class="w">  </span><span class="mi">200000</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Berisso&quot;</span><span class="p">,</span><span class="w">    </span><span class="mi">90000</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Berisso&quot;</span><span class="p">,</span><span class="w">   </span><span class="mi">110000</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;Ensenada&quot;</span><span class="p">,</span><span class="w">  </span><span class="mi">130000</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="s">&quot;FIN&quot;</span><span class="p">,</span><span class="w">            </span><span class="mi">0</span><span class="p">}</span><span class="w">   </span><span class="cm">/* centinela */</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">localidadActual</span><span class="p">[</span><span class="mi">20</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Primer dato — antes del while */</span>
+<span class="w">    </span><span class="n">strcpy</span><span class="p">(</span><span class="n">localidadActual</span><span class="p">,</span><span class="w"> </span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">localidad</span><span class="p">);</span>
+<span class="w">    </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">localidad</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FIN&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">strcmp</span><span class="p">(</span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">localidad</span><span class="p">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Mismo grupo: acumular */</span>
+<span class="w">            </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">precio</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/* Cambio de grupo: informar el anterior */</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="p">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="p">);</span>
+<span class="w">            </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="p">;</span>
+<span class="w">            </span><span class="cm">/* Actualizar criterio y arrancar el nuevo grupo */</span>
+<span class="w">            </span><span class="n">strcpy</span><span class="p">(</span><span class="n">localidadActual</span><span class="p">,</span><span class="w"> </span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">localidad</span><span class="p">);</span>
+<span class="w">            </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datos</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">precio</span><span class="p">;</span><span class="w">  </span><span class="cm">/* ← el dato actual ya es del nuevo grupo */</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="cm">/* Último grupo — nunca olvidar */</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%s: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="p">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="p">);</span>
+<span class="w">    </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Total general: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Qué observar en Python Tutor</p>
+<ul>
+<li>Stepear hasta la <strong>primera vez que entra al <code>else</code></strong> (cuando <code>i=2</code>, pasa de La Plata a Berisso): observá que <code>printf</code> imprime La Plata <strong>antes</strong> de que <code>localidadActual</code> cambie</li>
+<li>Fijate el valor de <code>totalLocalidad</code> justo antes y después del <code>else</code>: se imprime el acumulado anterior y luego se asigna <code>datos[i].precio</code> — si pusiera <code>0</code> en vez del precio, se perdería el primer elemento del nuevo grupo</li>
+<li>Al llegar a <code>"FIN"</code>, el <code>while</code> <strong>no entra</strong> — el último <code>printf</code> (fuera del loop) es el único que imprime Ensenada</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Equivalencia Pascal → C para strings</p>
+<p><div class="highlight"><pre><span></span><code>Pascal: localidad = localidadActual   →  C: strcmp(a, b) == 0
+Pascal: localidadActual := localidad  →  C: strcpy(dest, src)
+</code></pre></div>
+En Pascal los strings se comparan con <code>=</code> directamente; en C hay que usar <code>strcmp</code>.</p>
 </div>
 <hr />
 <h2 id="pythontutor-pythontutor-registros">Registros — struct con campos</h2>
