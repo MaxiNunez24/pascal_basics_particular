@@ -1311,6 +1311,9 @@
 <span class="k">end</span><span class="o">;</span>
 </code></pre></div>
 <hr />
+<hr />
+<h2 id="clases-03_vectores_registros-ver-en-python-tutor">🔬 Ver en Python Tutor</h2>
+<p>→ <a href="#pythontutor-pythontutor-seleccion">Snippet: ordenación por selección paso a paso</a></p>
 <div class="nav-links">
 <h2 id="clases-03_vectores_registros-anterior-siguiente-listas-enlazadas"><a href="#clases-02_modularizacion">⬅️ Anterior</a> | <a href="#clases-04_listas_enlazadas">➡️ Siguiente: Listas Enlazadas</a></h2>
 </div></section><section class="print-page" id="clases-04_listas_enlazadas" heading-number="2.4"><h1 id="clases-04_listas_enlazadas-listas-enlazadas">🔗 Listas Enlazadas</h1>
@@ -2130,6 +2133,57 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 Pascal: lista (sin var)       →  C: struct Nodo*  lista
 </code></pre></div>
 En <code>insertarDespuesDe</code> la cabecera no cambia, así que en C alcanza con <code>struct Nodo*</code> (un solo nivel de indirección).</p>
+</div>
+<hr />
+<h2 id="pythontutor-pythontutor-seleccion">Ordenación por Selección</h2>
+<p>El array usa índices del 1 al n (igual que en Pascal) — <code>v[0]</code> se declara pero no se usa.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Equivalente Pascal:</span>
+<span class="cm"> *   procedure seleccion(var v: TVector; n: integer)</span>
+<span class="cm"> *</span>
+<span class="cm"> * var v: recibe int* porque modifica el contenido del array</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">seleccion</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">,</span><span class="w"> </span><span class="n">iMin</span><span class="p">,</span><span class="w"> </span><span class="n">aux</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">iMin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">])</span>
+<span class="w">                </span><span class="n">iMin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="cm">/* intercambiar v[i] con v[iMin] */</span>
+<span class="w">        </span><span class="n">aux</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">        </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">];</span>
+<span class="w">        </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aux</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* v[0] sin usar — índices 1..5 como en Pascal */</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">v</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">};</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">seleccion</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w">   </span><span class="cm">/* → 8 12 25 45 64 */</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Qué observar en Python Tutor</p>
+<ul>
+<li>Al inicio de cada iteración del <code>for</code> externo, <code>v[1..i-1]</code> ya está ordenado (los mínimos ya ubicados)</li>
+<li>Seguí el valor de <code>iMin</code>: arranca en <code>i</code> y se actualiza cada vez que el <code>for</code> interno encuentra un valor menor</li>
+<li>El <strong>swap</strong> con <code>aux</code> ocupa exactamente 3 pasos — si alguno falta, se pierde un valor</li>
+<li>Después de la última iteración (<code>i = n-1</code>), el array queda completamente ordenado sin necesitar comparar <code>v[n]</code></li>
+</ul>
 </div>
 <hr />
 <h2 id="pythontutor-pythontutor-corte-de-control">Corte de Control</h2>
