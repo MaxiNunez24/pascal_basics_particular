@@ -1347,6 +1347,52 @@
 </tbody>
 </table>
 <hr />
+<h2 id="clases-04_listas_enlazadas-como-es-una-lista-por-dentro">¿Cómo es una lista por dentro?</h2>
+<p>Aunque <code>GenericLinkedList</code> oculta los detalles, internamente cada lista es una cadena de <strong>nodos</strong> en el heap. Cada nodo tiene dos cosas: el dato y un puntero al siguiente nodo.</p>
+<pre class="mermaid"><code>graph LR
+    lista["L (variable)"] --&gt; n1
+
+    subgraph heap
+        n1["valor: 10\nsiguiente: ●"] --&gt;|"●"| n2["valor: 20\nsiguiente: ●"] --&gt;|"●"| n3["valor: 30\nsiguiente: nil"]
+    end
+
+    style heap fill:#f0f4ff,stroke:#99b</code></pre>
+<ul>
+<li>El <strong>último nodo</strong> apunta a <code>nil</code> — ahí sabe <code>eol()</code> que terminó.</li>
+<li>No hay índices: para llegar al nodo 5 hay que atravesar los 4 anteriores. Por eso el recorrido es obligatoriamente secuencial.</li>
+<li>Cada llamada a <code>add()</code> crea un nuevo nodo en el heap y lo enlaza al final.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">reset / eol / current / next — traducción interna</p>
+<table>
+<thead>
+<tr>
+<th>Llamada en Pascal</th>
+<th>Lo que hace la librería por dentro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L.reset()</code></td>
+<td>Apunta el cursor al primer nodo</td>
+</tr>
+<tr>
+<td><code>L.eol()</code></td>
+<td>Pregunta si el cursor llegó a <code>nil</code></td>
+</tr>
+<tr>
+<td><code>L.current()</code></td>
+<td>Devuelve el dato del nodo apuntado por el cursor</td>
+</tr>
+<tr>
+<td><code>L.next()</code></td>
+<td>Avanza el cursor al siguiente nodo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>→ <a href="#pythontutor-pythontutor-listas-enlazadas">Ver en Python Tutor cómo se construye el heap</a></p>
+<hr />
 <h2 id="clases-04_listas_enlazadas-la-libreria-genericlinkedlist">La librería GenericLinkedList</h2>
 <p>En AyPI UNLP las listas se trabajan con la librería <code>GenericLinkedList</code>. Ella provee la estructura y los métodos — no hace falta manejar punteros manualmente.</p>
 <h3 id="clases-04_listas_enlazadas-importar-y-declarar-el-tipo">Importar y declarar el tipo</h3>
@@ -1959,6 +2005,58 @@ Legajo (0 para terminar): 0
 Los otros dos solo llaman métodos — no reasignan <code>L</code>, no necesitan <code>var</code>.</p>
 </details>
 <hr />
+<h2 id="ejercicios-ejercicios-ejercicio-4b-listas-mas-operaciones">Ejercicio 4b — Listas: más operaciones ⭐⭐⭐</h2>
+<p>Usando el mismo tipo del ejercicio anterior:</p>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">ListaE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="kt">integer</span><span class="o">&gt;;</span>
+</code></pre></div>
+<p>Implementar:</p>
+<ol>
+<li><code>function contarMayoresQue(L: ListaE; umbral: integer): integer</code> — cantidad de elementos estrictamente mayores que <code>umbral</code></li>
+<li><code>function maximo(L: ListaE): integer</code> — devuelve el mayor elemento (asumir que la lista no está vacía)</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<ul>
+<li>¿Cómo iniciás el <code>maximo</code> antes de entrar al while? ¿Con <code>0</code>? ¿Con el primer elemento?</li>
+<li>¿Cuál de las dos funciones necesitaría cambio si la lista pudiera estar vacía?</li>
+</ul>
+</div>
+<details class="success">
+<summary>✅ Solución</summary>
+<p><div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span><span class="nf">contarMayoresQue</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaE</span><span class="o">;</span><span class="w"> </span><span class="n">umbral</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">cant</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">cant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">umbral</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">cant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">contarMayoresQue</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">maximo</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaE</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="nb">max</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">max</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span><span class="w">   </span><span class="cm">{ primer elemento como valor inicial }</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">max</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">max</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">maximo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">max</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<code>maximo</code> se inicializa con <code>L.current()</code> (primer elemento), no con <code>0</code>. Si se iniciara con <code>0</code> y todos los elementos fueran negativos, el resultado sería incorrecto.</p>
+</details>
+<hr />
 <h2 id="ejercicios-ejercicios-ejercicio-5-corte-de-control">Ejercicio 5 — Corte de Control ⭐⭐⭐</h2>
 <p>Se dispone de inmuebles <strong>ordenados por localidad</strong>. Cada línea tiene: localidad (string) y precio (real). La entrada termina con <code>'FIN'</code>.</p>
 <p>Escribir un programa que imprima el <strong>total de precios por localidad</strong> y al final el <strong>total general</strong>.</p>
@@ -2130,6 +2228,160 @@ Total general: $ 680000.00
 </code></pre></div>
 <code>armarLista</code> lleva <code>var L</code> porque ejecuta <code>ListaInmuebles.create()</code>.
 <code>cortePorLocalidad</code> no lleva <code>var</code> porque solo recorre — no reasigna <code>L</code>.</p>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-7-vectores-ordenar-y-buscar">Ejercicio 7 — Vectores: ordenar y buscar ⭐⭐⭐</h2>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="nb">MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">MAX</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+</code></pre></div>
+<ol>
+<li>Implementar <code>procedure seleccion(var v: TVector; n: integer)</code> que ordene el vector de menor a mayor usando ordenación por selección.</li>
+<li>Implementar <code>function buscarOrdenado(v: TVector; n, x: integer): boolean</code> que busque <code>x</code> en el vector <strong>ya ordenado</strong>, deteniéndose en cuanto sepa que no puede estar.</li>
+</ol>
+<p><strong>Datos de prueba:</strong>
+<div class="highlight"><pre><span></span><code>n = 6,  v = [64, 25, 12, 45, 8, 30]
+Después de ordenar: [8, 12, 25, 30, 45, 64]
+buscarOrdenado(v, 6, 25) → true
+buscarOrdenado(v, 6, 40) → false
+</code></pre></div></p>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<ul>
+<li>¿Cuántas iteraciones hace el <code>for</code> externo de selección?</li>
+<li>¿En qué condición la búsqueda con orden puede parar antes de llegar al final?</li>
+<li>¿Por qué <code>v</code> lleva <code>var</code> en <code>seleccion</code> pero no en <code>buscarOrdenado</code>?</li>
+</ul>
+</div>
+<details class="success">
+<summary>✅ Solución</summary>
+<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">seleccion</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">i</span><span class="o">,</span><span class="w"> </span><span class="n">j</span><span class="o">,</span><span class="w"> </span><span class="n">iMin</span><span class="o">,</span><span class="w"> </span><span class="n">aux</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">iMin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="o">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">do</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="n">iMin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">j</span><span class="o">;</span>
+<span class="w">    </span><span class="n">aux</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">;</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="o">;</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aux</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">buscarOrdenado</span><span class="p">(</span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">i</span><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">encontrado</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="w">  </span><span class="n">superado</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">i</span><span class="w">         </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">  </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="w">  </span><span class="n">superado</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">encontrado</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">superado</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">superado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span><span class="w">    </span><span class="cm">{ el vector está ordenado: ya no puede estar }</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">buscarOrdenado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">encontrado</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<code>seleccion</code> necesita <code>var v</code> porque modifica el contenido del vector. <code>buscarOrdenado</code> no modifica nada — solo lee.</p>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-8-empleados-con-lista">Ejercicio 8 — Empleados con lista ⭐⭐⭐⭐</h2>
+<p>Definir:</p>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
+
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TEmpleado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">nombre</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">categoria</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span><span class="w">    </span><span class="cm">{ &#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39; o &#39;E&#39; }</span>
+<span class="w">    </span><span class="n">salario</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">ListaEmpleados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">TEmpleado</span><span class="o">&gt;;</span>
+</code></pre></div>
+<p>Implementar:</p>
+<ol>
+<li><code>procedure armarLista(var L: ListaEmpleados)</code> — lee empleados hasta que <code>nombre = 'FIN'</code></li>
+<li><code>function contarCategoria(L: ListaEmpleados; cat: char): integer</code> — cuántos empleados tienen esa categoría</li>
+<li><code>function salarioMaximo(L: ListaEmpleados): real</code> — devuelve el mayor salario (asumir lista no vacía)</li>
+</ol>
+<p><strong>Entrada de ejemplo:</strong>
+<div class="highlight"><pre><span></span><code>Ana A 85000
+Carlos B 72000
+Laura A 91000
+Pedro C 60000
+FIN X 0
+</code></pre></div></p>
+<p><strong>Salida esperada (usando los tres módulos):</strong>
+<div class="highlight"><pre><span></span><code>Empleados categoría A: 2
+Salario máximo: $ 91000.00
+</code></pre></div></p>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<ul>
+<li>¿Por qué <code>armarLista</code> necesita <code>var L</code> y los otros dos no?</li>
+<li>¿Cómo inicializás <code>salarioMaximo</code> antes del while? ¿Con <code>0</code>? ¿Con <code>L.current().salario</code>?</li>
+<li>¿Qué pasa si pasás <code>'A'</code> a <code>contarCategoria</code> dos veces? ¿El resultado cambia? ¿Por qué?</li>
+</ul>
+</div>
+<details class="success">
+<summary>✅ Solución</summary>
+<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">armarLista</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEmpleados</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">emp</span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleado</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaEmpleados</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">categoria</span><span class="o">,</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">salario</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">nombre</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">emp</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">categoria</span><span class="o">,</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">salario</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">contarCategoria</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEmpleados</span><span class="o">;</span><span class="w"> </span><span class="n">cat</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">cant</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">emp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleado</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">cant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">emp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">categoria</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">cant</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">contarCategoria</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">salarioMaximo</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEmpleados</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="nb">max</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="n">emp</span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleado</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">max</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">.</span><span class="n">salario</span><span class="o">;</span><span class="w">   </span><span class="cm">{ primer elemento como máximo inicial }</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">emp</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">salario</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">max</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">max</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">emp</span><span class="o">.</span><span class="n">salario</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">salarioMaximo</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">max</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+La segunda llamada a <code>contarCategoria</code> funciona igual: como no se modifica <code>L</code> ni se reasigna, el cursor interno queda en el estado que dejó la primera llamada... ¡pero <code>L.reset()</code> lo vuelve a poner al principio al inicio de cada llamada! Eso es exactamente por qué siempre se llama <code>reset()</code> al comenzar un recorrido.</p>
 </details></section><section class="print-page" id="pythontutor-pythontutor" heading-number="4"><h1 id="pythontutor-pythontutor-python-tutor-visualizacion-en-c">🔬 Python Tutor — Visualización en C</h1>
 <p>Python Tutor no soporta Pascal, pero el modelo de memoria de <strong>C es idéntico al de Pascal</strong>. Los snippets de esta página pueden pegarse directamente en <a href="https://pythontutor.com/c.html">pythontutor.com/c.html</a> para visualizar paso a paso.</p>
 <table>

@@ -471,6 +471,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#como-es-una-lista-por-dentro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo es una lista por dentro?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#la-libreria-genericlinkedlist" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -788,6 +799,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#como-es-una-lista-por-dentro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo es una lista por dentro?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#la-libreria-genericlinkedlist" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -989,6 +1011,52 @@
 </tr>
 </tbody>
 </table>
+<hr />
+<h2 id="como-es-una-lista-por-dentro">¿Cómo es una lista por dentro?</h2>
+<p>Aunque <code>GenericLinkedList</code> oculta los detalles, internamente cada lista es una cadena de <strong>nodos</strong> en el heap. Cada nodo tiene dos cosas: el dato y un puntero al siguiente nodo.</p>
+<pre class="mermaid"><code>graph LR
+    lista["L (variable)"] --&gt; n1
+
+    subgraph heap
+        n1["valor: 10\nsiguiente: ●"] --&gt;|"●"| n2["valor: 20\nsiguiente: ●"] --&gt;|"●"| n3["valor: 30\nsiguiente: nil"]
+    end
+
+    style heap fill:#f0f4ff,stroke:#99b</code></pre>
+<ul>
+<li>El <strong>último nodo</strong> apunta a <code>nil</code> — ahí sabe <code>eol()</code> que terminó.</li>
+<li>No hay índices: para llegar al nodo 5 hay que atravesar los 4 anteriores. Por eso el recorrido es obligatoriamente secuencial.</li>
+<li>Cada llamada a <code>add()</code> crea un nuevo nodo en el heap y lo enlaza al final.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">reset / eol / current / next — traducción interna</p>
+<table>
+<thead>
+<tr>
+<th>Llamada en Pascal</th>
+<th>Lo que hace la librería por dentro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L.reset()</code></td>
+<td>Apunta el cursor al primer nodo</td>
+</tr>
+<tr>
+<td><code>L.eol()</code></td>
+<td>Pregunta si el cursor llegó a <code>nil</code></td>
+</tr>
+<tr>
+<td><code>L.current()</code></td>
+<td>Devuelve el dato del nodo apuntado por el cursor</td>
+</tr>
+<tr>
+<td><code>L.next()</code></td>
+<td>Avanza el cursor al siguiente nodo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>→ <a href="../../pythontutor/pythontutor/#listas-enlazadas">Ver en Python Tutor cómo se construye el heap</a></p>
 <hr />
 <h2 id="la-libreria-genericlinkedlist">La librería GenericLinkedList</h2>
 <p>En AyPI UNLP las listas se trabajan con la librería <code>GenericLinkedList</code>. Ella provee la estructura y los métodos — no hace falta manejar punteros manualmente.</p>
