@@ -104,6 +104,12 @@ end.
 
 ---
 
+---
+
+## 🔬 Ver en Python Tutor
+
+→ [Snippet: corte de control paso a paso](../pythontutor/pythontutor.md#corte-de-control)
+
 <div class="nav-links" markdown="1">
 
 ## [⬅️ Anterior](04_listas_enlazadas.md) | [🏋️ Ir a ejercicios](../ejercicios/ejercicios.md)

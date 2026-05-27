@@ -187,6 +187,86 @@ int main() {
 
 ---
 
+## Corte de Control {#corte-de-control}
+
+Los datos están **hardcodeados en un array** para poder steppear sin tener que ingresar input.
+Pegá el código en [pythontutor.com/c.html](https://pythontutor.com/c.html) y avanzá de a un paso.
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+/*
+ * Equivalente Pascal:
+ *   while localidad <> 'FIN' do
+ *     if localidad = localidadActual then acumular
+ *     else informar + reiniciar
+ *   { informar último grupo }
+ */
+
+typedef struct {
+    char localidad[20];
+    double precio;
+} Inmueble;
+
+int main() {
+    /* Datos ordenados por localidad — simulan la entrada del programa */
+    Inmueble datos[] = {
+        {"La Plata",  150000},
+        {"La Plata",  200000},
+        {"Berisso",    90000},
+        {"Berisso",   110000},
+        {"Ensenada",  130000},
+        {"FIN",            0}   /* centinela */
+    };
+
+    int i = 0;
+    char localidadActual[20];
+    double totalLocalidad = 0;
+    double totalGeneral   = 0;
+
+    /* Primer dato — antes del while */
+    strcpy(localidadActual, datos[i].localidad);
+    totalLocalidad = 0;
+
+    while (strcmp(datos[i].localidad, "FIN") != 0) {
+        if (strcmp(datos[i].localidad, localidadActual) == 0) {
+            /* Mismo grupo: acumular */
+            totalLocalidad += datos[i].precio;
+        } else {
+            /* Cambio de grupo: informar el anterior */
+            printf("%s: %.2f\n", localidadActual, totalLocalidad);
+            totalGeneral += totalLocalidad;
+            /* Actualizar criterio y arrancar el nuevo grupo */
+            strcpy(localidadActual, datos[i].localidad);
+            totalLocalidad = datos[i].precio;  /* ← el dato actual ya es del nuevo grupo */
+        }
+        i++;
+    }
+
+    /* Último grupo — nunca olvidar */
+    printf("%s: %.2f\n", localidadActual, totalLocalidad);
+    totalGeneral += totalLocalidad;
+    printf("Total general: %.2f\n", totalGeneral);
+
+    return 0;
+}
+```
+
+!!! tip "Qué observar en Python Tutor"
+    - Stepear hasta la **primera vez que entra al `else`** (cuando `i=2`, pasa de La Plata a Berisso): observá que `printf` imprime La Plata **antes** de que `localidadActual` cambie
+    - Fijate el valor de `totalLocalidad` justo antes y después del `else`: se imprime el acumulado anterior y luego se asigna `datos[i].precio` — si pusiera `0` en vez del precio, se perdería el primer elemento del nuevo grupo
+    - Al llegar a `"FIN"`, el `while` **no entra** — el último `printf` (fuera del loop) es el único que imprime Ensenada
+
+!!! warning "Equivalencia Pascal → C para strings"
+    ```
+    Pascal: localidad = localidadActual   →  C: strcmp(a, b) == 0
+    Pascal: localidadActual := localidad  →  C: strcpy(dest, src)
+    ```
+    En Pascal los strings se comparan con `=` directamente; en C hay que usar `strcmp`.
+
+---
+
 ## Registros — struct con campos {#registros}
 
 ```c
