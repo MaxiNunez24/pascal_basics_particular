@@ -187,6 +187,59 @@ int main() {
 
 ---
 
+## Ordenación por Selección {#seleccion}
+
+El array usa índices del 1 al n (igual que en Pascal) — `v[0]` se declara pero no se usa.
+
+```c
+#include <stdio.h>
+
+/*
+ * Equivalente Pascal:
+ *   procedure seleccion(var v: TVector; n: integer)
+ *
+ * var v: recibe int* porque modifica el contenido del array
+ */
+void seleccion(int* v, int n) {
+    int i, j, iMin, aux;
+
+    for (i = 1; i <= n - 1; i++) {
+        iMin = i;
+        for (j = i + 1; j <= n; j++) {
+            if (v[j] < v[iMin])
+                iMin = j;
+        }
+        /* intercambiar v[i] con v[iMin] */
+        aux     = v[i];
+        v[i]    = v[iMin];
+        v[iMin] = aux;
+    }
+}
+
+int main() {
+    /* v[0] sin usar — índices 1..5 como en Pascal */
+    int v[] = {0, 64, 25, 12, 45, 8};
+    int n = 5;
+
+    seleccion(v, n);
+
+    int i;
+    for (i = 1; i <= n; i++)
+        printf("%d ", v[i]);
+    printf("\n");   /* → 8 12 25 45 64 */
+
+    return 0;
+}
+```
+
+!!! tip "Qué observar en Python Tutor"
+    - Al inicio de cada iteración del `for` externo, `v[1..i-1]` ya está ordenado (los mínimos ya ubicados)
+    - Seguí el valor de `iMin`: arranca en `i` y se actualiza cada vez que el `for` interno encuentra un valor menor
+    - El **swap** con `aux` ocupa exactamente 3 pasos — si alguno falta, se pierde un valor
+    - Después de la última iteración (`i = n-1`), el array queda completamente ordenado sin necesitar comparar `v[n]`
+
+---
+
 ## Corte de Control {#corte-de-control}
 
 Los datos están **hardcodeados en un array** para poder steppear sin tener que ingresar input.

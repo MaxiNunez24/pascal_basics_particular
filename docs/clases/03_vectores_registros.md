@@ -176,6 +176,12 @@ end;
 
 ---
 
+---
+
+## 🔬 Ver en Python Tutor
+
+→ [Snippet: ordenación por selección paso a paso](../pythontutor/pythontutor.md#seleccion)
+
 <div class="nav-links" markdown="1">
 
 ## [⬅️ Anterior](02_modularizacion.md) | [➡️ Siguiente: Listas Enlazadas](04_listas_enlazadas.md)
