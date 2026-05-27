@@ -120,4 +120,8 @@ end.
 
 ---
 
+<div class="nav-links" markdown="1">
+
 ## [➡️ Siguiente: Modularización](02_modularizacion.md)
+
+</div>

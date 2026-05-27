@@ -176,4 +176,8 @@ end;
 
 ---
 
+<div class="nav-links" markdown="1">
+
 ## [⬅️ Anterior](02_modularizacion.md) | [➡️ Siguiente: Listas Enlazadas](04_listas_enlazadas.md)
+
+</div>

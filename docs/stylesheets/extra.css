@@ -21,16 +21,6 @@ section.print-page + section.print-page {
 }
 
 /* Ocultar links de navegación Anterior/Siguiente en la página única */
-section.print-page a[href^="#clases-"],
-section.print-page a[href^="#ejercicios-"],
-section.print-page a[href^="#pythontutor-"],
-section.print-page a[href^="#index"] {
-  display: none;
-}
-
-section.print-page h2:has(> a[href^="#clases-"]),
-section.print-page h2:has(> a[href^="#ejercicios-"]),
-section.print-page h2:has(> a[href^="#pythontutor-"]),
-section.print-page h2:has(> a[href^="#index"]) {
+section.print-page .nav-links {
   display: none;
 }

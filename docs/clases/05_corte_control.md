@@ -104,4 +104,8 @@ end.
 
 ---
 
+<div class="nav-links" markdown="1">
+
 ## [⬅️ Anterior](04_listas_enlazadas.md) | [🏋️ Ir a ejercicios](../ejercicios/ejercicios.md)
+
+</div>

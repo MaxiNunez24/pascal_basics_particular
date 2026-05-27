@@ -132,4 +132,8 @@ end.
 
 ---
 
+<div class="nav-links" markdown="1">
+
 ## [⬅️ Anterior](01_estructuras_control.md) | [➡️ Siguiente: Vectores y Registros](03_vectores_registros.md)
+
+</div>

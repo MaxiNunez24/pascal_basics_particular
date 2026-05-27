@@ -217,4 +217,8 @@ end;
 
 ---
 
+<div class="nav-links" markdown="1">
+
 ## [⬅️ Anterior](03_vectores_registros.md) | [➡️ Siguiente: Corte de Control](05_corte_control.md)
+
+</div>
