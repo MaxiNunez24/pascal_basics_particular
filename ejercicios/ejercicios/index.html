@@ -575,6 +575,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ejercicio-6-corte-de-control-sobre-una-lista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 6 — Corte de Control sobre una Lista ⭐⭐⭐⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -712,6 +723,17 @@
     <span class="md-ellipsis">
       
         Ejercicio 5 — Corte de Control ⭐⭐⭐
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-6-corte-de-control-sobre-una-lista" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 6 — Corte de Control sobre una Lista ⭐⭐⭐⭐
       
     </span>
   </a>
@@ -1019,6 +1041,119 @@ Total general:        $ 755000.00
 <span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Total general:         $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
 <span class="k">end</span><span class="o">.</span>
 </code></pre></div>
+</details>
+<hr />
+<h2 id="ejercicio-6-corte-de-control-sobre-una-lista">Ejercicio 6 — Corte de Control sobre una Lista ⭐⭐⭐⭐</h2>
+<p>Tenés una lista de inmuebles <strong>ya armada y ordenada por localidad</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
+
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TInmueble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">localidad</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">precio</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">ListaInmuebles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">TInmueble</span><span class="o">&gt;;</span>
+</code></pre></div>
+<p>Implementar:</p>
+<ol>
+<li><code>procedure armarLista(var L: ListaInmuebles)</code> — lee pares <code>localidad precio</code> hasta que <code>localidad = 'FIN'</code> y los agrega a la lista</li>
+<li><code>procedure cortePorLocalidad(L: ListaInmuebles)</code> — imprime el total de precios por cada localidad y el total general</li>
+</ol>
+<p><strong>Ejemplo de entrada:</strong>
+<div class="highlight"><pre><span></span><code>La Plata 150000
+La Plata 200000
+Berisso 90000
+Berisso 110000
+Ensenada 130000
+FIN 0
+</code></pre></div></p>
+<p><strong>Salida esperada:</strong>
+<div class="highlight"><pre><span></span><code>Localidad: La Plata  $ 350000.00
+Localidad: Berisso   $ 200000.00
+Localidad: Ensenada  $ 130000.00
+Total general: $ 680000.00
+</code></pre></div></p>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<ul>
+<li>¿Cuál de los dos módulos lleva <code>var L</code>? ¿Por qué?</li>
+<li>¿Qué reemplaza al <code>readln</code> dentro del while? ¿Y al <code>readln</code> inicial antes del while?</li>
+<li>¿Cambia algo en el manejo del último grupo respecto al patrón clásico?</li>
+</ul>
+</div>
+<details class="tip">
+<summary>💡 Pista</summary>
+<p>El patrón del corte es exactamente el mismo. Solo cambiá:</p>
+<table>
+<thead>
+<tr>
+<th>Antes</th>
+<th>Ahora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readln(localidad, precio)</code></td>
+<td><code>inm := L.current()</code> + <code>L.next()</code></td>
+</tr>
+<tr>
+<td><code>while localidad &lt;&gt; 'FIN'</code></td>
+<td><code>while not L.eol()</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<details class="success">
+<summary>✅ Solución</summary>
+<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">armarLista</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">inm</span><span class="o">:</span><span class="w"> </span><span class="n">TInmueble</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">inm</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">cortePorLocalidad</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">inm</span><span class="w">            </span><span class="o">:</span><span class="w"> </span><span class="n">TInmueble</span><span class="o">;</span>
+<span class="w">  </span><span class="n">localidadActual</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalLocalidad</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ Equivalente al &quot;leer primer dato&quot; — posicionar y leer sin avanzar }</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="n">inm</span><span class="w">             </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="n">localidadActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalLocalidad</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">inm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localidadActual</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">      </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalGeneral</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">localidadActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span><span class="o">;</span>
+<span class="w">    </span><span class="k">end</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span><span class="w">   </span><span class="cm">{ avanzar — equivalente al readln al final del while }</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ ⚠️ Último grupo — igual que siempre }</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Total general: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<code>armarLista</code> lleva <code>var L</code> porque ejecuta <code>ListaInmuebles.create()</code>.
+<code>cortePorLocalidad</code> no lleva <code>var</code> porque solo recorre — no reasigna <code>L</code>.</p>
 </details>
 
 
