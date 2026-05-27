@@ -1342,225 +1342,210 @@
 <tr>
 <td>Inserción al inicio</td>
 <td>Costosa (hay que desplazar todos)</td>
-<td>Barata (solo cambiar punteros)</td>
+<td>Barata</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="clases-04_listas_enlazadas-estructura-de-un-nodo">Estructura de un nodo</h2>
-<pre class="mermaid"><code>graph LR
-    n1["valor: 10\nsiguiente: ●"] --&gt;|"●"| n2
-    n2["valor: 20\nsiguiente: ●"] --&gt;|"●"| n3
-    n3["valor: 30\nsiguiente: nil"] --&gt;|"nil"| nil["∅"]
+<h2 id="clases-04_listas_enlazadas-la-libreria-genericlinkedlist">La librería GenericLinkedList</h2>
+<p>En AyPI UNLP las listas se trabajan con la librería <code>GenericLinkedList</code>. Ella provee la estructura y los métodos — no hace falta manejar punteros manualmente.</p>
+<h3 id="clases-04_listas_enlazadas-importar-y-declarar-el-tipo">Importar y declarar el tipo</h3>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
 
-    lista["lista (PNodo)"] --&gt; n1
-
-    style nil fill:#eee,stroke:#aaa</code></pre>
-<div class="highlight"><pre><span></span><code><span class="k">type</span>
-<span class="w">  </span><span class="n">PNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">^</span><span class="n">TNodo</span><span class="o">;</span><span class="w">    </span><span class="cm">{ primero el puntero — forward declaration }</span>
-<span class="w">  </span><span class="n">TNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
-<span class="w">    </span><span class="n">valor</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
-<span class="w">    </span><span class="n">siguiente</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
-<span class="w">  </span><span class="k">end</span><span class="o">;</span>
-
-<span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">ListaEnteros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="kt">integer</span><span class="o">&gt;;</span>
+<span class="w">  </span><span class="cm">{ Para listas de registros: specialize LinkedList&lt;TInmueble&gt; }</span>
+</code></pre></div>
+<h3 id="clases-04_listas_enlazadas-crear-una-lista-vacia">Crear una lista vacía</h3>
+<div class="highlight"><pre><span></span><code><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="n">lista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span><span class="w">   </span><span class="cm">{ lista vacía }</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span><span class="w">  </span><span class="cm">{ lista vacía }</span>
 <span class="k">end</span><span class="o">.</span>
 </code></pre></div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-agregar-elementos">Agregar elementos</h2>
+<div class="highlight"><pre><span></span><code><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span><span class="o">;</span><span class="w">       </span><span class="cm">{ agrega AL FINAL }</span>
+<span class="n">L</span><span class="o">.</span><span class="n">addFirst</span><span class="p">(</span><span class="n">elemento</span><span class="p">)</span><span class="o">;</span><span class="w">  </span><span class="cm">{ agrega AL INICIO }</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Ejemplo: construir la lista 10 → 20 → 30 con add }</span>
+<span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">;</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">;</span>
+<span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">;</span>
+<span class="cm">{ Resultado: 10 → 20 → 30 }</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-recorrer-una-lista-el-patron">Recorrer una lista — el patrón</h2>
+<p>Cuatro métodos que siempre se usan juntos:</p>
+<table>
+<thead>
+<tr>
+<th>Método</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>L.reset()</code></td>
+<td>Mueve el cursor al <strong>primer</strong> elemento</td>
+</tr>
+<tr>
+<td><code>L.eol()</code></td>
+<td>Devuelve <code>true</code> si llegamos al <strong>final</strong> (<em>end of list</em>)</td>
+</tr>
+<tr>
+<td><code>L.current()</code></td>
+<td>Devuelve el elemento en la posición actual</td>
+</tr>
+<tr>
+<td><code>L.next()</code></td>
+<td>Avanza el cursor al siguiente elemento</td>
+</tr>
+</tbody>
+</table>
+<pre class="mermaid"><code>flowchart LR
+    R["L.reset()"] --&gt; C{"L.eol()?"}
+    C --&gt;|"Sí — fin"| FIN([Terminar])
+    C --&gt;|"No"| P["procesar\nL.current()"]
+    P --&gt; N["L.next()"]
+    N --&gt; C</code></pre>
+<div class="highlight"><pre><span></span><code><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">())</span><span class="o">;</span><span class="w">   </span><span class="cm">{ usar el elemento actual }</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span><span class="w">               </span><span class="cm">{ avanzar al siguiente }</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
 <div class="admonition warning">
-<p class="admonition-title">El orden de declaración importa</p>
-<p><code>PNodo = ^TNodo</code> siempre va <strong>antes</strong> que <code>TNodo = record</code>. Pascal necesita que el tipo puntero esté declarado antes que el registro que lo usa internamente.</p>
+<p class="admonition-title">Olvidar L.next() — bucle infinito</p>
+<p>Si no llamás <code>L.next()</code> al final del cuerpo del <code>while</code>, el cursor nunca avanza y el programa se cuelga.</p>
 </div>
 <hr />
-<h2 id="clases-04_listas_enlazadas-agregar-al-inicio-addfirst">Agregar al inicio — addFirst</h2>
-<p>El nuevo nodo se convierte en la nueva cabecera.</p>
-<pre class="mermaid"><code>graph LR
-    subgraph "Antes"
-        lista1["lista"] --&gt; a1["10"] --&gt; b1["20"] --&gt; nil1["nil"]
-    end
-    subgraph "Después de addFirst(5)"
-        lista2["lista"] --&gt; nuevo["5 ← NUEVO"] --&gt; a2["10"] --&gt; b2["20"] --&gt; nil2["nil"]
-    end</code></pre>
-<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valor</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">nuevo</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<h2 id="clases-04_listas_enlazadas-modulos-tipicos">Módulos típicos</h2>
+<h3 id="clases-04_listas_enlazadas-armarlista-necesita-var">armarLista — necesita VAR ⭐</h3>
+<div class="highlight"><pre><span></span><code><span class="cm">{ VAR porque el procedimiento REASIGNA L con create() }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">armarLista</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">num</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span><span class="w">                    </span><span class="cm">{ 1. crear nodo en memoria }</span>
-<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">valor</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 2. asignar dato }</span>
-<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 3. el nuevo apunta al que era primero }</span>
-<span class="w">  </span><span class="n">lista</span><span class="w">            </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 4. lista ahora apunta al nuevo }</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">read</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">read</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
 <span class="k">end</span><span class="o">;</span>
 </code></pre></div>
+<h3 id="clases-04_listas_enlazadas-recorrerlista-sin-var">recorrerLista — sin VAR</h3>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Sin VAR: solo llama métodos, no reasigna L }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">recorrerLista</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="p">)</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="clases-04_listas_enlazadas-sumarlista-funcion-sin-var">sumarLista — función sin VAR</h3>
+<div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span><span class="nf">sumarLista</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaEnteros</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">suma</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">suma</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">sumarLista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">suma</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-cuando-va-var-la-regla">¿Cuándo va VAR? — la regla</h2>
 <div class="admonition tip">
-<p class="admonition-title">¿Por qué lista va con VAR?</p>
-<p>Porque el procedimiento modifica <strong>quién es la cabecera</strong>. Si no fuera <code>var</code>, el programa principal nunca se enteraría del cambio.</p>
+<p class="admonition-title">Regla para listas con GenericLinkedList</p>
+<ul>
+<li><strong>Con <code>var L</code>:</strong> el módulo ejecuta <code>L := ListaTipo.create()</code> — está <strong>reasignando</strong> la variable.</li>
+<li><strong>Sin <code>var L</code>:</strong> el módulo solo llama métodos (<code>L.reset()</code>, <code>L.add()</code>, <code>L.current()</code>…) — aunque cambien el contenido interno, la variable <code>L</code> no se reasigna.</li>
+</ul>
 </div>
-<hr />
-<h2 id="clases-04_listas_enlazadas-agregar-al-final-add">Agregar al final — add</h2>
-<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valor</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">nuevo</span><span class="o">,</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
-<span class="k">begin</span>
-<span class="w">  </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span>
-<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">valor</span><span class="o">;</span>
-<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span>
-
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="n">lista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="w">              </span><span class="cm">{ lista estaba vacía }</span>
-<span class="w">  </span><span class="k">else</span>
-<span class="w">  </span><span class="k">begin</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span><span class="w">   </span><span class="cm">{ llegar al último nodo }</span>
-<span class="w">      </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
-<span class="w">    </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">         </span><span class="cm">{ enlazar al final }</span>
-<span class="w">  </span><span class="k">end</span><span class="o">;</span>
-<span class="k">end</span><span class="o">;</span>
-</code></pre></div>
-<hr />
-<h2 id="clases-04_listas_enlazadas-recorrer-una-lista">Recorrer una lista</h2>
-<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="p">)</span><span class="o">;</span><span class="w">    </span><span class="cm">{ SIN var — no modifica la cabecera }</span>
-<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
-<span class="k">begin</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">begin</span>
-<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="p">)</span><span class="o">;</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
-<span class="w">  </span><span class="k">end</span><span class="o">;</span>
-<span class="k">end</span><span class="o">;</span>
-</code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">¿Cuándo va VAR en los módulos de lista?</p>
 <table>
 <thead>
 <tr>
 <th>Módulo</th>
-<th>¿Modifica la cabecera?</th>
+<th>¿Reasigna L?</th>
 <th>¿Usa VAR?</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>addFirst</code></td>
-<td>Sí</td>
+<td><code>armarLista</code></td>
+<td>Sí (<code>L := ListaE.create()</code>)</td>
 <td>✅</td>
 </tr>
 <tr>
-<td><code>add</code> (a lista vacía)</td>
-<td>Sí</td>
-<td>✅</td>
+<td><code>recorrerLista</code></td>
+<td>No</td>
+<td>❌</td>
 </tr>
 <tr>
-<td><code>mostrar</code>, <code>buscar</code>, <code>contar</code></td>
+<td><code>sumarLista</code></td>
+<td>No</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>buscarEnLista</code></td>
 <td>No</td>
 <td>❌</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition info">
+<p class="admonition-title">Las listas son objetos (tipos referencia)</p>
+<p>A diferencia de los vectores, las listas son un <strong>tipo objeto</strong>. Cuando pasás <code>L</code> sin <code>var</code>, el módulo y el programa principal comparten la <strong>misma lista</strong> en memoria — los métodos como <code>add()</code> sí modifican el contenido. Solo se necesita <code>var</code> cuando la propia variable se reasigna con <code>create()</code>.</p>
 </div>
 <hr />
-<h2 id="clases-04_listas_enlazadas-buscar-en-una-lista">Buscar en una lista</h2>
-<div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<h2 id="clases-04_listas_enlazadas-lista-de-registros">Lista de registros</h2>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
+
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TInmueble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">localidad</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">precio</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">ListaInmuebles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">TInmueble</span><span class="o">&gt;;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">armarListaInmuebles</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">inm</span><span class="o">:</span><span class="w"> </span><span class="n">TInmueble</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
-<span class="w">  </span><span class="n">buscar</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span><span class="w">   </span><span class="cm">{ si salimos sin llegar a nil, lo encontramos }</span>
-<span class="k">end</span><span class="o">;</span>
-</code></pre></div>
-<hr />
-<h2 id="clases-04_listas_enlazadas-insertar-en-el-medio">Insertar en el medio</h2>
-<p>Insertar un nodo <strong>después</strong> de un nodo específico ya existente en la lista.</p>
-<p>El truco está en el <strong>orden de los dos pasos</strong> — si los invertís, perdés el resto de la lista.</p>
-<pre class="mermaid"><code>graph LR
-    subgraph "① nuevo^.siguiente := actual^.siguiente"
-        A2["10\n(actual)"] --&gt; B2["30"]
-        N2["NUEVO: 20"] --&gt;|"siguiente"| B2
-    end
-
-    subgraph "② actual^.siguiente := nuevo"
-        A3["10"] --&gt;|"siguiente"| N3["NUEVO: 20"]
-        N3 --&gt; B3["30"]
-    end</code></pre>
-<div class="admonition danger">
-<p class="admonition-title">El orden importa — no invertir los pasos</p>
-<div class="highlight"><pre><span></span><code><span class="cm">{ ✅ Correcto }</span>
-<span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ 1ro: NUEVO apunta al siguiente }</span>
-<span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ 2do: anterior apunta al NUEVO }</span>
-
-<span class="cm">{ ❌ Incorrecto — perdés el resto de la lista }</span>
-<span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ actual ya no apunta a 30... }</span>
-<span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ ...esto asigna nuevo a sí mismo }</span>
-</code></pre></div>
-</div>
-<div class="highlight"><pre><span></span><code><span class="cm">{ Insertar un valor nuevo DESPUÉS del nodo que contiene &#39;valorBuscar&#39; }</span>
-<span class="k">procedure</span><span class="w"> </span><span class="nf">insertarDespuesDe</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valorBuscar</span><span class="o">,</span><span class="w"> </span><span class="n">valorNuevo</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
-<span class="k">var</span>
-<span class="w">  </span><span class="n">nuevo</span><span class="o">,</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
-<span class="k">begin</span>
-<span class="w">  </span><span class="cm">{ 1. Buscar el nodo de referencia }</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
-
-<span class="w">  </span><span class="cm">{ 2. Si lo encontramos, insertar después }</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">begin</span>
-<span class="w">    </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span><span class="n">valorNuevo</span><span class="o">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ paso 1: enlazar hacia adelante }</span>
-<span class="w">    </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ paso 2: enlazar hacia atrás }</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">inm</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrarInmuebles</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaInmuebles</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">inm</span><span class="o">:</span><span class="w"> </span><span class="n">TInmueble</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">inm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="n">inm</span><span class="o">.</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">inm</span><span class="o">.</span><span class="n">precio</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
 <span class="w">  </span><span class="k">end</span><span class="o">;</span>
 <span class="k">end</span><span class="o">;</span>
 </code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">¿Por qué lista NO necesita VAR acá?</p>
-<p>Porque estamos insertando <strong>en el medio</strong>: la cabecera (<code>lista</code>) no cambia. Solo se modifican los punteros internos de nodos que ya existen. <code>lista</code> no necesita <code>var</code>.</p>
-<p>Si quisiéramos insertar <strong>antes del primero</strong> (nuevo caso borde), ahí sí cambia la cabecera y necesitaríamos <code>var lista</code>.</p>
-</div>
-<hr />
-<h2 id="clases-04_listas_enlazadas-cuando-va-var-tabla-completa">¿Cuándo va VAR? — tabla completa</h2>
-<table>
-<thead>
-<tr>
-<th>Módulo</th>
-<th>¿Modifica la cabecera?</th>
-<th>¿Usa VAR?</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>addFirst</code></td>
-<td>Sí</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>add</code> (lista vacía)</td>
-<td>Sí</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><code>add</code> (lista no vacía)</td>
-<td>No</td>
-<td>❌ (pero se declara <code>var</code> por el caso vacío)</td>
-</tr>
-<tr>
-<td><code>insertarDespuesDe</code></td>
-<td>No</td>
-<td>❌</td>
-</tr>
-<tr>
-<td><code>mostrar</code>, <code>buscar</code>, <code>contar</code></td>
-<td>No</td>
-<td>❌</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="clases-04_listas_enlazadas-ver-en-python-tutor">🔬 Ver en Python Tutor</h2>
-<p>→ <a href="#pythontutor-pythontutor-listas-enlazadas">Snippet: addFirst paso a paso en memoria</a><br />
-→ <a href="#pythontutor-pythontutor-insertar-en-el-medio">Snippet: insertar en el medio</a></p>
-<hr />
+<p>→ <a href="#pythontutor-pythontutor-listas-enlazadas">Cómo funciona internamente una lista enlazada</a></p>
 <div class="nav-links">
 <h2 id="clases-04_listas_enlazadas-anterior-siguiente-corte-de-control"><a href="#clases-03_vectores_registros">⬅️ Anterior</a> | <a href="#clases-05_corte_control">➡️ Siguiente: Corte de Control</a></h2>
 </div></section><section class="print-page" id="clases-05_corte_control" heading-number="2.5"><h1 id="clases-05_corte_control-corte-de-control">✂️ Corte de Control</h1>
@@ -1819,60 +1804,68 @@ Legajo (0 para terminar): 0
 </details>
 <hr />
 <h2 id="ejercicios-ejercicios-ejercicio-4-listas-enlazadas">Ejercicio 4 — Listas Enlazadas ⭐⭐⭐</h2>
-<p>Dado el tipo:
-<div class="highlight"><pre><span></span><code><span class="k">type</span>
-<span class="w">  </span><span class="n">PNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">^</span><span class="n">TNodo</span><span class="o">;</span>
-<span class="w">  </span><span class="n">TNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
-<span class="w">    </span><span class="n">valor</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
-<span class="w">    </span><span class="n">siguiente</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
-<span class="w">  </span><span class="k">end</span><span class="o">;</span>
-</code></pre></div></p>
+<p>Usar la librería <code>GenericLinkedList</code> con una lista de enteros:</p>
+<div class="highlight"><pre><span></span><code><span class="k">uses</span><span class="w"> </span><span class="n">GenericLinkedList</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">ListaE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">specialize</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="kt">integer</span><span class="o">&gt;;</span>
+</code></pre></div>
 <p>Implementar:</p>
 <ol>
-<li><code>procedure contarElementos(lista: PNodo; var cant: integer)</code> — cuenta los nodos</li>
-<li><code>procedure mostrarLista(lista: PNodo)</code> — imprime todos los valores</li>
-<li><code>function buscarEnLista(lista: PNodo; x: integer): boolean</code> — devuelve <code>true</code> si el valor está</li>
+<li><code>procedure armarLista(var L: ListaE)</code> — lee enteros hasta leer <code>-1</code> y los agrega a la lista</li>
+<li><code>function sumarLista(L: ListaE): integer</code> — retorna la suma de todos los elementos</li>
+<li><code>function buscarEnLista(L: ListaE; x: integer): boolean</code> — devuelve <code>true</code> si el valor está</li>
 </ol>
 <div class="admonition question">
 <p class="admonition-title">Para pensar</p>
-<p>¿Cuáles de estos tres módulos necesitan <code>lista</code> con <code>var</code>? ¿Por qué?</p>
+<ul>
+<li>¿Por qué <code>armarLista</code> necesita <code>var L</code> y <code>sumarLista</code> no?</li>
+<li>¿Qué patrón de recorrido usás en <code>sumarLista</code> y <code>buscarEnLista</code>?</li>
+</ul>
 </div>
 <details class="success">
 <summary>✅ Solución</summary>
-<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">contarElementos</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">cant</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">armarLista</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaE</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">num</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="n">cant</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">L</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">ListaE</span><span class="o">.</span><span class="n">create</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">read</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">begin</span>
-<span class="w">    </span><span class="n">cant</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">read</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">;</span>
 <span class="w">  </span><span class="k">end</span><span class="o">;</span>
 <span class="k">end</span><span class="o">;</span>
 
-<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrarLista</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="p">)</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">function</span><span class="w"> </span><span class="nf">sumarLista</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaE</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">suma</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="n">suma</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">()</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">begin</span>
-<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="p">)</span><span class="o">;</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">    </span><span class="n">suma</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">;</span>
+<span class="w">    </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
 <span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">sumarLista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">suma</span><span class="o">;</span>
 <span class="k">end</span><span class="o">;</span>
 
-<span class="k">function</span><span class="w"> </span><span class="nf">buscarEnLista</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
-<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">function</span><span class="w"> </span><span class="nf">buscarEnLista</span><span class="p">(</span><span class="n">L</span><span class="o">:</span><span class="w"> </span><span class="n">ListaE</span><span class="o">;</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">encontrado</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
 <span class="k">begin</span>
-<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
-<span class="w">  </span><span class="n">buscarEnLista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span>
+<span class="w">  </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="w">  </span><span class="n">L</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">eol</span><span class="p">())</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">encontrado</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">L</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="n">L</span><span class="o">.</span><span class="n">next</span><span class="p">()</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">buscarEnLista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">encontrado</span><span class="o">;</span>
 <span class="k">end</span><span class="o">;</span>
 </code></pre></div>
-Ninguno necesita <code>var lista</code> porque ninguno modifica quién es la cabecera.
-<code>cant</code> sí necesita <code>var</code> porque es el valor que se devuelve.</p>
+<code>armarLista</code> necesita <code>var L</code> porque reasigna la variable con <code>ListaE.create()</code>.
+Los otros dos solo llaman métodos — no reasignan <code>L</code>, no necesitan <code>var</code>.</p>
 </details>
 <hr />
 <h2 id="ejercicios-ejercicios-ejercicio-5-corte-de-control">Ejercicio 5 — Corte de Control ⭐⭐⭐</h2>
@@ -2008,8 +2001,8 @@ Total general:        $ 755000.00
 </code></pre></div>
 </div>
 <hr />
-<h2 id="pythontutor-pythontutor-listas-enlazadas">Listas Enlazadas — addFirst</h2>
-<p>Visualiza cómo cada <code>addFirst</code> crea un nuevo nodo en el heap y actualiza el puntero cabecera. Es el mismo comportamiento que en Pascal.</p>
+<h2 id="pythontutor-pythontutor-listas-enlazadas">Listas Enlazadas — cómo funciona internamente</h2>
+<p><code>GenericLinkedList</code> oculta los punteros, pero por dentro la lista es exactamente esto: nodos en el <strong>heap</strong> encadenados por punteros. Este snippet muestra cómo funciona <code>add</code> y el recorrido internamente — útil para entender por qué el recorrido es secuencial y no por índice.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 
@@ -2018,28 +2011,37 @@ Total general:        $ 755000.00
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="cm">/* Equivalente a: procedure addFirst(var lista: PNodo; valor: integer) */</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/* Lo que hace L.add(valor) por dentro */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">            </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">        </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
+<span class="cm">/* Lo que hace el patrón reset/eol/current/next por dentro */</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span>
-<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span><span class="w">   </span><span class="cm">/* reset: ir al primero */</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="cm">/* eol: llegamos al final? */</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span><span class="w">   </span><span class="cm">/* current */</span>
+<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span><span class="w">      </span><span class="cm">/* next */</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">   </span><span class="cm">/* lista := nil */</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">   </span><span class="cm">/* L := ListaE.create() */</span>
 
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/* La lista quedó: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span>
@@ -2049,15 +2051,16 @@ Total general:        $ 755000.00
 <div class="admonition tip">
 <p class="admonition-title">Qué observar en Python Tutor</p>
 <ul>
-<li>Cada <code>addFirst</code> agrega un frame nuevo en el <strong>stack</strong> y un nodo en el <strong>heap</strong></li>
-<li>El doble puntero <code>**lista</code> en C corresponde al <code>var lista: PNodo</code> en Pascal</li>
-<li>Al salir de <code>addFirst</code>, el heap conserva el nodo — la memoria dinámica persiste</li>
+<li>Cada <code>add</code> crea un nuevo nodo en el <strong>heap</strong> y lo enlaza al final</li>
+<li>El heap conserva los nodos después de que <code>add</code> retorna — la memoria dinámica persiste</li>
+<li><code>mostrar</code> recorre secuencialmente siguiendo punteros — no hay acceso directo por índice</li>
+<li>Esto es exactamente lo que <code>GenericLinkedList</code> hace por debajo cuando usás <code>reset/eol/current/next</code></li>
 </ul>
 </div>
 <hr />
-<h2 id="pythontutor-pythontutor-insertar-en-el-medio">Listas Enlazadas — Insertar en el medio</h2>
-<p>Este snippet muestra el paso crítico: el <strong>orden</strong> en que se reasignan los punteros.<br />
-Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
+<h2 id="pythontutor-pythontutor-insertar-en-el-medio">Listas Enlazadas — por qué el orden de los pasos importa</h2>
+<p>Este snippet muestra el paso crítico al insertar en el medio: el <strong>orden</strong> en que se reasignan los punteros.<br />
+<code>GenericLinkedList</code> lo hace por vos, pero entender esto ayuda a razonar sobre el comportamiento de la lista.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 
@@ -2066,26 +2069,29 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">            </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">        </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="cm">/*</span>
-<span class="cm"> * Equivalente Pascal:</span>
-<span class="cm"> *   procedure insertarDespuesDe(lista: PNodo; valorBuscar, valorNuevo: integer)</span>
-<span class="cm"> *</span>
-<span class="cm"> * lista NO es doble puntero porque no cambia la cabecera.</span>
+<span class="cm"> * Insertar un nodo DESPUÉS del nodo que tiene &#39;valorBuscar&#39;.</span>
+<span class="cm"> * La cabecera no cambia → un solo puntero (no doble).</span>
 <span class="cm"> */</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">insertarDespuesDe</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="cm">/* 1. Buscar el nodo de referencia */</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">)</span>
 <span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/* 2. Insertar después si se encontró */</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">        </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">;</span>
@@ -2106,12 +2112,10 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/* Armar lista: 10 -&gt; 30 -&gt; NULL */</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 30 */</span>
 
-<span class="w">    </span><span class="cm">/* Insertar 20 después del 10: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
 <span class="w">    </span><span class="n">insertarDespuesDe</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 20 30 */</span>
 
@@ -2121,18 +2125,10 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <div class="admonition tip">
 <p class="admonition-title">Qué observar en Python Tutor</p>
 <ul>
-<li>Cuando <code>insertarDespuesDe</code> empieza, <code>lista</code> <strong>no es doble puntero</strong> — la cabecera no cambia</li>
 <li>Fijate el estado del heap <strong>entre el paso 1 y el paso 2</strong>: <code>nuevo-&gt;siguiente</code> ya apunta a <code>30</code>, pero <code>10-&gt;siguiente</code> todavía apunta a <code>30</code> también — ambos apuntan al mismo nodo momentáneamente</li>
 <li>Después del paso 2: <code>10-&gt;siguiente</code> pasa a apuntar a <code>NUEVO (20)</code>, y la cadena queda correcta</li>
 <li>Si invirtieras los pasos, en el paso 1 <code>actual-&gt;siguiente</code> ya sería <code>nuevo</code>, y <code>nuevo-&gt;siguiente = actual-&gt;siguiente</code> asignaría <code>nuevo</code> a sí mismo — bucle infinito</li>
 </ul>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Equivalencia Pascal → C para el doble puntero</p>
-<p><div class="highlight"><pre><span></span><code>Pascal: var lista: PNodo      →  C: struct Nodo** lista
-Pascal: lista (sin var)       →  C: struct Nodo*  lista
-</code></pre></div>
-En <code>insertarDespuesDe</code> la cabecera no cambia, así que en C alcanza con <code>struct Nodo*</code> (un solo nivel de indirección).</p>
 </div>
 <hr />
 <h2 id="pythontutor-pythontutor-seleccion">Ordenación por Selección</h2>

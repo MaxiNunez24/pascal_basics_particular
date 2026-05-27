@@ -560,7 +560,7 @@
   <a href="#listas-enlazadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Listas Enlazadas — addFirst
+        Listas Enlazadas — cómo funciona internamente
       
     </span>
   </a>
@@ -571,7 +571,7 @@
   <a href="#insertar-en-el-medio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Listas Enlazadas — Insertar en el medio
+        Listas Enlazadas — por qué el orden de los pasos importa
       
     </span>
   </a>
@@ -687,7 +687,7 @@
   <a href="#listas-enlazadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Listas Enlazadas — addFirst
+        Listas Enlazadas — cómo funciona internamente
       
     </span>
   </a>
@@ -698,7 +698,7 @@
   <a href="#insertar-en-el-medio" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Listas Enlazadas — Insertar en el medio
+        Listas Enlazadas — por qué el orden de los pasos importa
       
     </span>
   </a>
@@ -830,8 +830,8 @@
 </code></pre></div>
 </div>
 <hr />
-<h2 id="listas-enlazadas">Listas Enlazadas — addFirst</h2>
-<p>Visualiza cómo cada <code>addFirst</code> crea un nuevo nodo en el heap y actualiza el puntero cabecera. Es el mismo comportamiento que en Pascal.</p>
+<h2 id="listas-enlazadas">Listas Enlazadas — cómo funciona internamente</h2>
+<p><code>GenericLinkedList</code> oculta los punteros, pero por dentro la lista es exactamente esto: nodos en el <strong>heap</strong> encadenados por punteros. Este snippet muestra cómo funciona <code>add</code> y el recorrido internamente — útil para entender por qué el recorrido es secuencial y no por índice.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 
@@ -840,28 +840,37 @@
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="cm">/* Equivalente a: procedure addFirst(var lista: PNodo; valor: integer) */</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="cm">/* Lo que hace L.add(valor) por dentro */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">            </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">        </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
+<span class="cm">/* Lo que hace el patrón reset/eol/current/next por dentro */</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span>
-<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span><span class="w">   </span><span class="cm">/* reset: ir al primero */</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">       </span><span class="cm">/* eol: llegamos al final? */</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span><span class="w">   </span><span class="cm">/* current */</span>
+<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span><span class="w">      </span><span class="cm">/* next */</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">   </span><span class="cm">/* lista := nil */</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">   </span><span class="cm">/* L := ListaE.create() */</span>
 
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
 
 <span class="w">    </span><span class="cm">/* La lista quedó: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span>
@@ -871,15 +880,16 @@
 <div class="admonition tip">
 <p class="admonition-title">Qué observar en Python Tutor</p>
 <ul>
-<li>Cada <code>addFirst</code> agrega un frame nuevo en el <strong>stack</strong> y un nodo en el <strong>heap</strong></li>
-<li>El doble puntero <code>**lista</code> en C corresponde al <code>var lista: PNodo</code> en Pascal</li>
-<li>Al salir de <code>addFirst</code>, el heap conserva el nodo — la memoria dinámica persiste</li>
+<li>Cada <code>add</code> crea un nuevo nodo en el <strong>heap</strong> y lo enlaza al final</li>
+<li>El heap conserva los nodos después de que <code>add</code> retorna — la memoria dinámica persiste</li>
+<li><code>mostrar</code> recorre secuencialmente siguiendo punteros — no hay acceso directo por índice</li>
+<li>Esto es exactamente lo que <code>GenericLinkedList</code> hace por debajo cuando usás <code>reset/eol/current/next</code></li>
 </ul>
 </div>
 <hr />
-<h2 id="insertar-en-el-medio">Listas Enlazadas — Insertar en el medio</h2>
-<p>Este snippet muestra el paso crítico: el <strong>orden</strong> en que se reasignan los punteros.<br />
-Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
+<h2 id="insertar-en-el-medio">Listas Enlazadas — por qué el orden de los pasos importa</h2>
+<p>Este snippet muestra el paso crítico al insertar en el medio: el <strong>orden</strong> en que se reasignan los punteros.<br />
+<code>GenericLinkedList</code> lo hace por vos, pero entender esto ayuda a razonar sobre el comportamiento de la lista.</p>
 <div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
 
@@ -888,26 +898,29 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
-<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
-<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">*</span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span>
+<span class="w">            </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">        </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="cm">/*</span>
-<span class="cm"> * Equivalente Pascal:</span>
-<span class="cm"> *   procedure insertarDespuesDe(lista: PNodo; valorBuscar, valorNuevo: integer)</span>
-<span class="cm"> *</span>
-<span class="cm"> * lista NO es doble puntero porque no cambia la cabecera.</span>
+<span class="cm"> * Insertar un nodo DESPUÉS del nodo que tiene &#39;valorBuscar&#39;.</span>
+<span class="cm"> * La cabecera no cambia → un solo puntero (no doble).</span>
 <span class="cm"> */</span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">insertarDespuesDe</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="cm">/* 1. Buscar el nodo de referencia */</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">)</span>
 <span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/* 2. Insertar después si se encontró */</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
 <span class="w">        </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">;</span>
@@ -928,12 +941,10 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
 
-<span class="w">    </span><span class="cm">/* Armar lista: 10 -&gt; 30 -&gt; NULL */</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
-<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 30 */</span>
 
-<span class="w">    </span><span class="cm">/* Insertar 20 después del 10: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
 <span class="w">    </span><span class="n">insertarDespuesDe</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
 <span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 20 30 */</span>
 
@@ -943,18 +954,10 @@ Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
 <div class="admonition tip">
 <p class="admonition-title">Qué observar en Python Tutor</p>
 <ul>
-<li>Cuando <code>insertarDespuesDe</code> empieza, <code>lista</code> <strong>no es doble puntero</strong> — la cabecera no cambia</li>
 <li>Fijate el estado del heap <strong>entre el paso 1 y el paso 2</strong>: <code>nuevo-&gt;siguiente</code> ya apunta a <code>30</code>, pero <code>10-&gt;siguiente</code> todavía apunta a <code>30</code> también — ambos apuntan al mismo nodo momentáneamente</li>
 <li>Después del paso 2: <code>10-&gt;siguiente</code> pasa a apuntar a <code>NUEVO (20)</code>, y la cadena queda correcta</li>
 <li>Si invirtieras los pasos, en el paso 1 <code>actual-&gt;siguiente</code> ya sería <code>nuevo</code>, y <code>nuevo-&gt;siguiente = actual-&gt;siguiente</code> asignaría <code>nuevo</code> a sí mismo — bucle infinito</li>
 </ul>
-</div>
-<div class="admonition warning">
-<p class="admonition-title">Equivalencia Pascal → C para el doble puntero</p>
-<p><div class="highlight"><pre><span></span><code>Pascal: var lista: PNodo      →  C: struct Nodo** lista
-Pascal: lista (sin var)       →  C: struct Nodo*  lista
-</code></pre></div>
-En <code>insertarDespuesDe</code> la cabecera no cambia, así que en C alcanza con <code>struct Nodo*</code> (un solo nivel de indirección).</p>
 </div>
 <hr />
 <h2 id="seleccion">Ordenación por Selección</h2>
