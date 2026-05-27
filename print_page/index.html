@@ -1,0 +1,2238 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Maximiliano Nuñez">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>📄 Todo en una página - AyPI — Parcial Pascal</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+        <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
+        })
+        </script>
+        </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#index" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="AyPI — Parcial Pascal" class="md-header__button md-logo" aria-label="AyPI — Parcial Pascal" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AyPI — Parcial Pascal
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              📄 Todo en una página
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="AyPI — Parcial Pascal" class="md-nav__button md-logo" aria-label="AyPI — Parcial Pascal" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8 3a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2H3v2h1a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2v-2H8v-5a2 2 0 0 0-2-2 2 2 0 0 0 2-2V5h2V3m6 0a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h1v2h-1a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2v-2h2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5h-2V3z"/></svg>
+
+    </a>
+    AyPI — Parcial Pascal
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏠 Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Temas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Temas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clases/01_estructuras_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔀 Estructuras de Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clases/02_modularizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧩 Modularización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clases/03_vectores_registros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📊 Vectores y Registros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clases/04_listas_enlazadas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔗 Listas Enlazadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clases/05_corte_control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ✂️ Corte de Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejercicios/ejercicios/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏋️ Ejercicios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pythontutor/pythontutor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔬 Python Tutor (C)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📄 Todo en una página
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📄 Todo en una página
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏠 Inicio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Temas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Temas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-01_estructuras_control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 Estructuras de Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-02_modularizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧩 Modularización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-03_vectores_registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Vectores y Registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-04_listas_enlazadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Listas Enlazadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-05_corte_control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✂️ Corte de Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏋️ Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pythontutor-pythontutor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔬 Python Tutor (C)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏠 Inicio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Temas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Temas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clases-01_estructuras_control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 Estructuras de Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-02_modularizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧩 Modularización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-03_vectores_registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Vectores y Registros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-04_listas_enlazadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Listas Enlazadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clases-05_corte_control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✂️ Corte de Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicios-ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏋️ Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pythontutor-pythontutor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔬 Python Tutor (C)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div id="print-site-page" class="">
+        <section class="print-page">
+            <div id="print-page-toc" data-toc-depth="2">
+                <nav role='navigation' class='print-page-toc-nav'>
+                <h1 class='print-page-toc-title'>Contenido</h1>
+                </nav>
+            </div>
+        </section>
+        <section class="print-page" id="index" heading-number="1"><h1 id="index-aypi-repaso-para-el-parcial">🎯 AyPI — Repaso para el Parcial</h1>
+<p><strong>Materia:</strong> Algoritmos y Programación I — Ciencia de Datos, UNLP<br />
+<strong>Lenguaje:</strong> Pascal (Free Pascal / Turbo Pascal)</p>
+<hr />
+<h2 id="index-temas-del-parcial">📋 Temas del parcial</h2>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Dificultad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#clases-01_estructuras_control">🔀 Estructuras de Control</a></td>
+<td>⭐</td>
+</tr>
+<tr>
+<td><a href="#clases-02_modularizacion">🧩 Modularización</a></td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#clases-03_vectores_registros">📊 Vectores y Registros</a></td>
+<td>⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#clases-04_listas_enlazadas">🔗 Listas Enlazadas</a></td>
+<td>⭐⭐⭐</td>
+</tr>
+<tr>
+<td><a href="#clases-05_corte_control">✂️ Corte de Control</a></td>
+<td>⭐⭐⭐</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="index-tips-clave-para-el-parcial">🔥 Tips clave para el parcial</h2>
+<div class="admonition warning">
+<p class="admonition-title">Las 5 reglas de oro</p>
+<ol>
+<li><strong>No variables globales</strong> — toda comunicación por parámetros</li>
+<li><strong>WHILE con centinela</strong> — el primer <code>read</code> va <strong>afuera</strong> del loop</li>
+<li><strong>Búsqueda en vector ordenado</strong> — parar si el elemento actual ya supera al buscado</li>
+<li><strong>Listas</strong> — <code>lista</code> va con <code>var</code> solo cuando se modifica la cabecera</li>
+<li><strong>Corte de control</strong> — siempre informar el <strong>último grupo</strong> después del <code>while</code></li>
+</ol>
+</div>
+<hr />
+<h2 id="index-python-tutor">🔬 Python Tutor</h2>
+<p>Para visualizar el modelo de memoria (VAR vs valor, listas enlazadas) usamos código C equivalente en <a href="https://pythontutor.com/c.html">Python Tutor</a>. El modelo de memoria de C es idéntico al de Pascal.</p>
+<p>→ <a href="#pythontutor-pythontutor">Ver snippets listos para Python Tutor</a></p></section>
+                    <section class='print-page md-section' id='section-2' heading-number='2'>
+                        <h1>📚 Temas<a class='headerlink' href='#section-2' title='Permanent link'></a>
+                        </h1>
+                    <section class="print-page" id="clases-01_estructuras_control" heading-number="2.1"><h1 id="clases-01_estructuras_control-estructuras-de-control">🔀 Estructuras de Control</h1>
+<hr />
+<h2 id="clases-01_estructuras_control-cuando-usar-cada-una">¿Cuándo usar cada una?</h2>
+<table>
+<thead>
+<tr>
+<th>Estructura</th>
+<th>Cuándo usarla</th>
+<th>Ejemplo típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IF-THEN-ELSE</code></td>
+<td>Tomar una decisión según una condición</td>
+<td>¿El promedio es &gt;= 6?</td>
+</tr>
+<tr>
+<td><code>FOR</code></td>
+<td>Cantidad de iteraciones <strong>conocida de antemano</strong></td>
+<td>Procesar los 7 días de la semana</td>
+</tr>
+<tr>
+<td><code>WHILE</code></td>
+<td>Cantidad de iteraciones <strong>desconocida</strong> (depende de una condición)</td>
+<td>Leer datos hasta que el usuario ingrese -1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clases-01_estructuras_control-if-then-else">IF-THEN-ELSE</h2>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="n">condicion</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="n">instruccion_si_verdad</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="n">instruccion_si_falso</span><span class="o">;</span>
+
+<span class="cm">{ Con múltiples instrucciones, siempre usar BEGIN...END }</span>
+<span class="k">if</span><span class="w"> </span><span class="n">promedio</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="k">then</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Aprobado&#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Promedio: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Desaprobado&#39;</span><span class="p">)</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">No se necesita BEGIN...END con una sola instrucción</p>
+<p>Pero si tenés dudas, siempre es seguro ponerlos. El error más común es olvidarlos cuando agregás una segunda instrucción.</p>
+</div>
+<hr />
+<h2 id="clases-01_estructuras_control-for">FOR</h2>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Recorre de inicio a fin, inclusive }</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Día &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Características del FOR</p>
+<ul>
+<li>La variable contadora <strong>se incrementa automáticamente</strong> en 1 cada vez</li>
+<li>El rango se evalúa <strong>antes de arrancar</strong> el loop</li>
+<li>Si <code>inicio &gt; fin</code>, el cuerpo <strong>nunca se ejecuta</strong></li>
+<li>Para contar al revés: <code>for i := 10 downto 1 do</code></li>
+</ul>
+</div>
+<hr />
+<h2 id="clases-01_estructuras_control-while-el-patron-con-centinela">WHILE — el patrón con centinela</h2>
+<pre class="mermaid"><code>flowchart TD
+    A([Inicio]) --&gt; B[Leer PRIMER valor\n⚠️ Afuera del while]
+    B --&gt; C{valor ≠ centinela?}
+    C --&gt;|No - terminar| F([Fin])
+    C --&gt;|Sí - continuar| D[Procesar valor]
+    D --&gt; E[Leer SIGUIENTE valor\n⚠️ Al final del cuerpo]
+    E --&gt; C</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">{ ✅ Patrón correcto }</span>
+<span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span><span class="w">             </span><span class="cm">{ ← primer read AFUERA }</span>
+
+<span class="k">while</span><span class="w"> </span><span class="n">legajo</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="cm">{ procesar }</span>
+<span class="w">  </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span><span class="w">           </span><span class="cm">{ ← siguiente read AL FINAL }</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Error más común — leer solo dentro del while</p>
+<div class="highlight"><pre><span></span><code><span class="cm">{ ❌ Incorrecto — nunca entra si legajo arranca en 0,</span>
+<span class="cm">   o nunca termina si el primer valor no es 0 sin leer el siguiente }</span>
+<span class="k">while</span><span class="w"> </span><span class="n">legajo</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span><span class="w">   </span><span class="cm">{ ← falta leer antes del while }</span>
+<span class="w">  </span><span class="cm">{ procesar }</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+</div>
+<hr />
+<h2 id="clases-01_estructuras_control-ejemplo-completo">Ejemplo completo</h2>
+<p>Leer legajos y 3 notas por alumno. Terminar cuando el legajo es 0. Mostrar el promedio de cada alumno.</p>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">PromedioAlumnos</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">legajo</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">nota1</span><span class="o">,</span><span class="w"> </span><span class="n">nota2</span><span class="o">,</span><span class="w"> </span><span class="n">nota3</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">legajo</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 1: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota1</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 2: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 3: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">promedio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">nota1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Promedio alumno &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">legajo</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<hr />
+<div class="nav-links">
+<h2 id="clases-01_estructuras_control-siguiente-modularizacion"><a href="#clases-02_modularizacion">➡️ Siguiente: Modularización</a></h2>
+</div></section><section class="print-page" id="clases-02_modularizacion" heading-number="2.2"><h1 id="clases-02_modularizacion-modularizacion">🧩 Modularización</h1>
+<p>Dividir un programa complejo en partes más pequeñas, reutilizables e independientes.</p>
+<hr />
+<h2 id="clases-02_modularizacion-function-vs-procedure">FUNCTION vs PROCEDURE</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>function</code></th>
+<th><code>procedure</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Devuelve</strong></td>
+<td>Un único valor</td>
+<td>Nada (o varios por <code>var</code>)</td>
+</tr>
+<tr>
+<td><strong>Se usa en</strong></td>
+<td>Expresiones: <code>x := f(...)</code></td>
+<td>Instrucciones: <code>p(...)</code></td>
+</tr>
+<tr>
+<td><strong>Cuándo</strong></td>
+<td>Calcular algo: promedio, mínimo, <code>esPrimo</code></td>
+<td>Hacer algo: leer datos, mostrar resultados</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="cm">{ FUNCTION — devuelve un valor real }</span>
+<span class="k">function</span><span class="w"> </span><span class="nf">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">calcularPromedio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="o">;</span><span class="w">  </span><span class="cm">{ así se &quot;retorna&quot; el valor }</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="cm">{ PROCEDURE — realiza una tarea }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrarResultado</span><span class="p">(</span><span class="n">nombre</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Alumno: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; — Promedio: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-02_modularizacion-pasaje-por-valor-vs-por-referencia">Pasaje por VALOR vs por REFERENCIA</h2>
+<pre class="mermaid"><code>graph LR
+    subgraph main["Programa principal"]
+        a["a = 5"]
+        b["b = 5"]
+    end
+
+    subgraph pv["porValor(x)"]
+        xv["x = 5 📋 copia\nx = 99 (cambio local)"]
+    end
+
+    subgraph pr["porReferencia(var x)"]
+        xr["x → apunta a b\nb = 99 ✏️ cambia el original"]
+    end
+
+    a --&gt;|"pasa una copia"| xv
+    xv --&gt;|"a sigue siendo 5"| a
+    b --&gt;|"pasa la dirección"| xr
+    xr --&gt;|"b ahora es 99"| b</code></pre>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Por VALOR — recibe una copia }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">porValor</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">99</span><span class="o">;</span><span class="w">  </span><span class="cm">{ solo modifica la copia local, no afecta al original }</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="cm">{ Por REFERENCIA — recibe la dirección de la variable original }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">porReferencia</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">x</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">99</span><span class="o">;</span><span class="w">  </span><span class="cm">{ modifica el original }</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">a</span><span class="o">,</span><span class="w"> </span><span class="n">b</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">a</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="o">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">5</span><span class="o">;</span>
+<span class="w">  </span><span class="n">porValor</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">;</span><span class="w">        </span><span class="cm">{ a sigue siendo 5 }</span>
+<span class="w">  </span><span class="n">porReferencia</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">;</span><span class="w">   </span><span class="cm">{ b ahora es 99    }</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">¿Cuándo usar VAR?</p>
+<table>
+<thead>
+<tr>
+<th>El módulo necesita...</th>
+<th>Usar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Solo <strong>leer</strong> el dato</td>
+<td>Sin <code>var</code> (por valor)</td>
+</tr>
+<tr>
+<td><strong>Modificar</strong> el dato o <strong>devolverlo</strong></td>
+<td>Con <code>var</code> (por referencia)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Regla de oro del parcial</p>
+<p><strong>No declarar variables globales.</strong> Toda comunicación entre el programa principal y los módulos debe ser exclusivamente a través de parámetros.</p>
+</div>
+<hr />
+<h2 id="clases-02_modularizacion-ejemplo-completo-modularizado">Ejemplo completo modularizado</h2>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">Alumnos</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">calcularPromedio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">estaAprobado</span><span class="p">(</span><span class="n">prom</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">estaAprobado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">prom</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">6.0</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">informarResultado</span><span class="p">(</span><span class="n">nombre</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">prom</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">prom</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Alumno: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; — Promedio: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">prom</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; — &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">estaAprobado</span><span class="p">(</span><span class="n">prom</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;APROBADO&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;DESAPROBADO&#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="cm">{ Programa principal }</span>
+<span class="k">var</span><span class="w"> </span><span class="n">nombre</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">informarResultado</span><span class="p">(</span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<ul>
+<li>¿Por qué <code>nombre</code>, <code>n1</code>, <code>n2</code>, <code>n3</code> en <code>informarResultado</code> van <strong>sin</strong> <code>var</code>?</li>
+<li>¿Podría <code>calcularPromedio</code> ser un <code>procedure</code>? ¿Qué cambiaría?</li>
+</ul>
+</div>
+<hr />
+<h2 id="clases-02_modularizacion-ver-en-python-tutor">🔬 Ver en Python Tutor</h2>
+<p>→ <a href="#pythontutor-pythontutor-var-vs-valor">Snippet: VAR vs valor en memoria</a></p>
+<hr />
+<div class="nav-links">
+<h2 id="clases-02_modularizacion-anterior-siguiente-vectores-y-registros"><a href="#clases-01_estructuras_control">⬅️ Anterior</a> | <a href="#clases-03_vectores_registros">➡️ Siguiente: Vectores y Registros</a></h2>
+</div></section><section class="print-page" id="clases-03_vectores_registros" heading-number="2.3"><h1 id="clases-03_vectores_registros-vectores-y-registros">📊 Vectores y Registros</h1>
+<hr />
+<h2 id="clases-03_vectores_registros-registro-record">Registro (record)</h2>
+<p>Agrupa datos de <strong>tipos distintos</strong> (heterogéneos) bajo un mismo nombre. Es como una ficha.</p>
+<div class="highlight"><pre><span></span><code><span class="k">type</span>
+<span class="w">  </span><span class="n">TInmueble</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">tipo</span><span class="w">     </span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">precio</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">    </span><span class="n">localidad</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="k">var</span>
+<span class="w">  </span><span class="n">casa</span><span class="o">:</span><span class="w"> </span><span class="n">TInmueble</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">casa</span><span class="o">.</span><span class="n">tipo</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;Casa&#39;</span><span class="o">;</span><span class="w">        </span><span class="cm">{ acceso con punto }</span>
+<span class="w">  </span><span class="n">casa</span><span class="o">.</span><span class="n">precio</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="mi">150000</span><span class="o">;</span>
+<span class="w">  </span><span class="n">casa</span><span class="o">.</span><span class="n">localidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;La Plata&#39;</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="n">casa</span><span class="o">.</span><span class="n">tipo</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; en &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">casa</span><span class="o">.</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">casa</span><span class="o">.</span><span class="n">precio</span><span class="o">:</span><span class="mi">8</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-03_vectores_registros-vector-array">Vector (array)</h2>
+<p>Colección de datos del <strong>mismo tipo</strong> (homogéneos), accesibles por índice.</p>
+<h3 id="clases-03_vectores_registros-dimension-fisica-vs-logica">Dimensión física vs lógica</h3>
+<pre class="mermaid"><code>graph LR
+    subgraph "array[1..100] of integer — física: 100 celdas"
+        direction LR
+        c1["[1]\n10"]
+        c2["[2]\n25"]
+        c3["[3]\n7"]
+        c4["[4]\n..."]
+        cn["[100]\n?"]
+        c1 --- c2 --- c3 --- c4 --- cn
+    end
+
+    n["n = 3\n(dimensión lógica:\ncuántos se usan)"]
+    c3 -. "hasta acá" .- n</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="nb">MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">MAX</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="o">;</span>
+<span class="w">  </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span><span class="w">   </span><span class="cm">{ dimensión LÓGICA: cuántos elementos hay realmente }</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Siempre pasar n, no MAX</p>
+<p>Los módulos reciben <code>n</code> (la cantidad real de elementos), nunca <code>MAX</code>.
+<div class="highlight"><pre><span></span><code><span class="cm">{ ✅ Correcto }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+
+<span class="cm">{ ❌ Incorrecto }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="p">)</span><span class="o">;</span><span class="w">  </span><span class="cm">{ ¿cómo sabe hasta dónde llegar? }</span>
+</code></pre></div></p>
+</div>
+<hr />
+<h2 id="clases-03_vectores_registros-vector-de-registros">Vector de registros</h2>
+<div class="highlight"><pre><span></span><code><span class="k">type</span>
+<span class="w">  </span><span class="n">TEmpleado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">nombre</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">categoria</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span><span class="w">    </span><span class="cm">{ A, B, C, D o E }</span>
+<span class="w">    </span><span class="n">salario</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">TEmpleados</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">MAX</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">TEmpleado</span><span class="o">;</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">emp</span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleados</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">emp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;Ana&#39;</span><span class="o">;</span><span class="w">    </span><span class="cm">{ índice + campo }</span>
+<span class="w">  </span><span class="n">emp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="o">;</span>
+<span class="w">  </span><span class="n">emp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">salario</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">85000</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-03_vectores_registros-algoritmos-sobre-vectores">Algoritmos sobre vectores</h2>
+<h3 id="clases-03_vectores_registros-busqueda-sin-orden-recorre-todo">Búsqueda sin orden — recorre todo</h3>
+<div class="highlight"><pre><span></span><code><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">encontrado</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+<span class="cm">{ si encontrado=true, el índice es i }</span>
+</code></pre></div>
+<h3 id="clases-03_vectores_registros-busqueda-con-orden-se-detiene-antes">Búsqueda con orden — se detiene antes ⭐</h3>
+<div class="highlight"><pre><span></span><code><span class="cm">{ El vector está ordenado de menor a mayor }</span>
+<span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="n">superado</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="k">false</span><span class="o">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">encontrado</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="k">not</span><span class="w"> </span><span class="n">superado</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">encontrado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">superado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">true</span><span class="w">      </span><span class="cm">{ ya no tiene sentido seguir buscando }</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">¿Por qué es más eficiente?</p>
+<p>Si el vector es <code>[3, 7, 12, 20, 35]</code> y busco el 10:
+- Sin orden: comparo contra 3, 7, 12, 20, 35 → <strong>5 comparaciones</strong>
+- Con orden: comparo contra 3, 7, 12 → cuando veo 12 &gt; 10, <strong>paro</strong> → <strong>3 comparaciones</strong></p>
+</div>
+<h3 id="clases-03_vectores_registros-ordenacion-por-seleccion">Ordenación por Selección</h3>
+<div class="highlight"><pre><span></span><code>Para cada posición i (de 1 a n-1):
+    Buscar el índice del MÍNIMO entre posición i y n
+    Intercambiar v[i] con v[iMin]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">seleccion</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">v</span><span class="o">:</span><span class="w"> </span><span class="n">TVector</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">i</span><span class="o">,</span><span class="w"> </span><span class="n">j</span><span class="o">,</span><span class="w"> </span><span class="n">iMin</span><span class="o">,</span><span class="w"> </span><span class="n">aux</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">iMin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="o">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">do</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="n">iMin</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">j</span><span class="o">;</span>
+<span class="w">    </span><span class="cm">{ intercambiar }</span>
+<span class="w">    </span><span class="n">aux</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">;</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="o">;</span>
+<span class="w">    </span><span class="n">v</span><span class="p">[</span><span class="n">iMin</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">aux</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<h3 id="clases-03_vectores_registros-vector-contador">Vector contador</h3>
+<p>Contar elementos por categoría usando la categoría como índice:</p>
+<div class="highlight"><pre><span></span><code><span class="k">type</span>
+<span class="w">  </span><span class="n">TContadores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;E&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">contar</span><span class="p">(</span><span class="n">emp</span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleados</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">cont</span><span class="o">:</span><span class="w"> </span><span class="n">TContadores</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span><span class="w"> </span><span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s">&#39;E&#39;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">cont</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span><span class="w">   </span><span class="cm">{ inicializar }</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">cont</span><span class="p">[</span><span class="n">emp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cont</span><span class="p">[</span><span class="n">emp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<div class="nav-links">
+<h2 id="clases-03_vectores_registros-anterior-siguiente-listas-enlazadas"><a href="#clases-02_modularizacion">⬅️ Anterior</a> | <a href="#clases-04_listas_enlazadas">➡️ Siguiente: Listas Enlazadas</a></h2>
+</div></section><section class="print-page" id="clases-04_listas_enlazadas" heading-number="2.4"><h1 id="clases-04_listas_enlazadas-listas-enlazadas">🔗 Listas Enlazadas</h1>
+<p>A diferencia de los vectores, las listas no tienen tamaño fijo: crecen y se achican durante la ejecución.</p>
+<hr />
+<h2 id="clases-04_listas_enlazadas-vector-vs-lista">Vector vs Lista</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Vector</th>
+<th>Lista</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tamaño</td>
+<td>Fijo (<code>MAX</code>) declarado en compilación</td>
+<td>Dinámico — crece en ejecución</td>
+</tr>
+<tr>
+<td>Acceso</td>
+<td>Directo por índice: <code>v[5]</code></td>
+<td>Secuencial — hay que recorrer</td>
+</tr>
+<tr>
+<td>Inserción al inicio</td>
+<td>Costosa (hay que desplazar todos)</td>
+<td>Barata (solo cambiar punteros)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clases-04_listas_enlazadas-estructura-de-un-nodo">Estructura de un nodo</h2>
+<pre class="mermaid"><code>graph LR
+    n1["valor: 10\nsiguiente: ●"] --&gt;|"●"| n2
+    n2["valor: 20\nsiguiente: ●"] --&gt;|"●"| n3
+    n3["valor: 30\nsiguiente: nil"] --&gt;|"nil"| nil["∅"]
+
+    lista["lista (PNodo)"] --&gt; n1
+
+    style nil fill:#eee,stroke:#aaa</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">type</span>
+<span class="w">  </span><span class="n">PNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">^</span><span class="n">TNodo</span><span class="o">;</span><span class="w">    </span><span class="cm">{ primero el puntero — forward declaration }</span>
+<span class="w">  </span><span class="n">TNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">valor</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">    </span><span class="n">siguiente</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">lista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span><span class="w">   </span><span class="cm">{ lista vacía }</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">El orden de declaración importa</p>
+<p><code>PNodo = ^TNodo</code> siempre va <strong>antes</strong> que <code>TNodo = record</code>. Pascal necesita que el tipo puntero esté declarado antes que el registro que lo usa internamente.</p>
+</div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-agregar-al-inicio-addfirst">Agregar al inicio — addFirst</h2>
+<p>El nuevo nodo se convierte en la nueva cabecera.</p>
+<pre class="mermaid"><code>graph LR
+    subgraph "Antes"
+        lista1["lista"] --&gt; a1["10"] --&gt; b1["20"] --&gt; nil1["nil"]
+    end
+    subgraph "Después de addFirst(5)"
+        lista2["lista"] --&gt; nuevo["5 ← NUEVO"] --&gt; a2["10"] --&gt; b2["20"] --&gt; nil2["nil"]
+    end</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valor</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">nuevo</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span><span class="w">                    </span><span class="cm">{ 1. crear nodo en memoria }</span>
+<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">valor</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 2. asignar dato }</span>
+<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 3. el nuevo apunta al que era primero }</span>
+<span class="w">  </span><span class="n">lista</span><span class="w">            </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">     </span><span class="cm">{ 4. lista ahora apunta al nuevo }</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">¿Por qué lista va con VAR?</p>
+<p>Porque el procedimiento modifica <strong>quién es la cabecera</strong>. Si no fuera <code>var</code>, el programa principal nunca se enteraría del cambio.</p>
+</div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-agregar-al-final-add">Agregar al final — add</h2>
+<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valor</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">nuevo</span><span class="o">,</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">     </span><span class="o">:=</span><span class="w"> </span><span class="n">valor</span><span class="o">;</span>
+<span class="w">  </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="n">lista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="w">              </span><span class="cm">{ lista estaba vacía }</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span><span class="w">   </span><span class="cm">{ llegar al último nodo }</span>
+<span class="w">      </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">    </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">         </span><span class="cm">{ enlazar al final }</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-recorrer-una-lista">Recorrer una lista</h2>
+<div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="p">)</span><span class="o">;</span><span class="w">    </span><span class="cm">{ SIN var — no modifica la cabecera }</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">¿Cuándo va VAR en los módulos de lista?</p>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>¿Modifica la cabecera?</th>
+<th>¿Usa VAR?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addFirst</code></td>
+<td>Sí</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>add</code> (a lista vacía)</td>
+<td>Sí</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>mostrar</code>, <code>buscar</code>, <code>contar</code></td>
+<td>No</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-buscar-en-una-lista">Buscar en una lista</h2>
+<div class="highlight"><pre><span></span><code><span class="k">function</span><span class="w"> </span><span class="nf">buscar</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">  </span><span class="n">buscar</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span><span class="w">   </span><span class="cm">{ si salimos sin llegar a nil, lo encontramos }</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-insertar-en-el-medio">Insertar en el medio</h2>
+<p>Insertar un nodo <strong>después</strong> de un nodo específico ya existente en la lista.</p>
+<p>El truco está en el <strong>orden de los dos pasos</strong> — si los invertís, perdés el resto de la lista.</p>
+<pre class="mermaid"><code>graph LR
+    subgraph "① nuevo^.siguiente := actual^.siguiente"
+        A2["10\n(actual)"] --&gt; B2["30"]
+        N2["NUEVO: 20"] --&gt;|"siguiente"| B2
+    end
+
+    subgraph "② actual^.siguiente := nuevo"
+        A3["10"] --&gt;|"siguiente"| N3["NUEVO: 20"]
+        N3 --&gt; B3["30"]
+    end</code></pre>
+<div class="admonition danger">
+<p class="admonition-title">El orden importa — no invertir los pasos</p>
+<div class="highlight"><pre><span></span><code><span class="cm">{ ✅ Correcto }</span>
+<span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ 1ro: NUEVO apunta al siguiente }</span>
+<span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ 2do: anterior apunta al NUEVO }</span>
+
+<span class="cm">{ ❌ Incorrecto — perdés el resto de la lista }</span>
+<span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ actual ya no apunta a 30... }</span>
+<span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ ...esto asigna nuevo a sí mismo }</span>
+</code></pre></div>
+</div>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Insertar un valor nuevo DESPUÉS del nodo que contiene &#39;valorBuscar&#39; }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">insertarDespuesDe</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">valorBuscar</span><span class="o">,</span><span class="w"> </span><span class="n">valorNuevo</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">nuevo</span><span class="o">,</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="cm">{ 1. Buscar el nodo de referencia }</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ 2. Si lo encontramos, insertar después }</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">new</span><span class="p">(</span><span class="n">nuevo</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">valor</span><span class="w">      </span><span class="o">:=</span><span class="w"> </span><span class="n">valorNuevo</span><span class="o">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">^.</span><span class="n">siguiente</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span><span class="w">  </span><span class="cm">{ paso 1: enlazar hacia adelante }</span>
+<span class="w">    </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">nuevo</span><span class="o">;</span><span class="w">              </span><span class="cm">{ paso 2: enlazar hacia atrás }</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">¿Por qué lista NO necesita VAR acá?</p>
+<p>Porque estamos insertando <strong>en el medio</strong>: la cabecera (<code>lista</code>) no cambia. Solo se modifican los punteros internos de nodos que ya existen. <code>lista</code> no necesita <code>var</code>.</p>
+<p>Si quisiéramos insertar <strong>antes del primero</strong> (nuevo caso borde), ahí sí cambia la cabecera y necesitaríamos <code>var lista</code>.</p>
+</div>
+<hr />
+<h2 id="clases-04_listas_enlazadas-cuando-va-var-tabla-completa">¿Cuándo va VAR? — tabla completa</h2>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>¿Modifica la cabecera?</th>
+<th>¿Usa VAR?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>addFirst</code></td>
+<td>Sí</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>add</code> (lista vacía)</td>
+<td>Sí</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>add</code> (lista no vacía)</td>
+<td>No</td>
+<td>❌ (pero se declara <code>var</code> por el caso vacío)</td>
+</tr>
+<tr>
+<td><code>insertarDespuesDe</code></td>
+<td>No</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><code>mostrar</code>, <code>buscar</code>, <code>contar</code></td>
+<td>No</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="clases-04_listas_enlazadas-ver-en-python-tutor">🔬 Ver en Python Tutor</h2>
+<p>→ <a href="#pythontutor-pythontutor-listas-enlazadas">Snippet: addFirst paso a paso en memoria</a><br />
+→ <a href="#pythontutor-pythontutor-insertar-en-el-medio">Snippet: insertar en el medio</a></p>
+<hr />
+<div class="nav-links">
+<h2 id="clases-04_listas_enlazadas-anterior-siguiente-corte-de-control"><a href="#clases-03_vectores_registros">⬅️ Anterior</a> | <a href="#clases-05_corte_control">➡️ Siguiente: Corte de Control</a></h2>
+</div></section><section class="print-page" id="clases-05_corte_control" heading-number="2.5"><h1 id="clases-05_corte_control-corte-de-control">✂️ Corte de Control</h1>
+<p>Es uno de los temas <strong>más recurrentes en el parcial</strong>. Aparece cuando los datos vienen ordenados por un criterio y hay que procesar por grupos.</p>
+<hr />
+<h2 id="clases-05_corte_control-cuando-se-usa">¿Cuándo se usa?</h2>
+<p>Cuando los datos están <strong>ordenados</strong> por algún criterio (localidad, departamento, categoría) y necesitás:
+- Calcular totales <strong>por grupo</strong>
+- Imprimir resultados <strong>cuando cambia el criterio</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo típico</p>
+<p>Inmuebles ordenados por localidad. Para cada localidad: imprimir el total de precios.
+<div class="highlight"><pre><span></span><code>La Plata   150000
+La Plata   200000   → cuando cambia a &quot;Berisso&quot;: informar La Plata
+Berisso     90000
+Berisso    110000   → cuando llega FIN: informar Berisso
+FIN              0
+</code></pre></div></p>
+</div>
+<hr />
+<h2 id="clases-05_corte_control-el-patron-memorizarlo">El patrón — memorizarlo</h2>
+<pre class="mermaid"><code>flowchart TD
+    A([Inicio]) --&gt; B["Leer primer dato\ncriterio, valor"]
+    B --&gt; C["criterioActual := criterio\nacumulador := valor\ntotalGeneral := 0"]
+    C --&gt; D{"criterio ≠ 'FIN'?"}
+    D --&gt;|Sí| E{"criterio =\ncriterioActual?"}
+    E --&gt;|"Sí — mismo grupo"| F["acumulador += valor"]
+    E --&gt;|"No — cambio de grupo"| G["Informar criterioActual\ntotalGeneral += acumulador\ncriterioActual := criterio\nacumulador := valor"]
+    F --&gt; H["Leer siguiente:\ncriterio, valor"]
+    G --&gt; H
+    H --&gt; D
+    D --&gt;|No| I["⚠️ Informar ÚLTIMO grupo\ntotalGeneral += acumulador"]
+    I --&gt; J["Informar totalGeneral"]
+    J --&gt; K([Fin])
+
+    style I fill:#ff9999,stroke:#cc0000</code></pre>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">CortePorLocalidad</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">  </span><span class="n">precio</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ 1. Leer el PRIMER dato }</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">localidadActual</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalLocalidad</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">localidad</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">localidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localidadActual</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="cm">{ mismo grupo: acumular }</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precio</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">      </span><span class="cm">{ cambio de grupo }</span>
+<span class="w">      </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">8</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalGeneral</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">localidadActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">precio</span><span class="o">;</span><span class="w">   </span><span class="cm">{ ← el dato ACTUAL ya es del nuevo grupo }</span>
+<span class="w">    </span><span class="k">end</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ 2. ⚠️ Informar el ÚLTIMO grupo — nunca olvidar }</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">8</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Total general: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+<hr />
+<h2 id="clases-05_corte_control-los-dos-errores-clasicos-del-parcial">Los dos errores clásicos del parcial</h2>
+<div class="admonition danger">
+<p class="admonition-title">Error 1 — Olvidar el último grupo</p>
+<p>El <code>while</code> termina cuando llega <code>'FIN'</code>. El <strong>último grupo</strong> nunca tuvo un cambio de criterio que lo disparara, así que hay que informarlo <strong>después del <code>while</code></strong> siempre.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">{ ❌ Falta esto después del while: }</span>
+<span class="nb">writeln</span><span class="p">(</span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">8</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+</code></pre></div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Error 2 — Reiniciar el acumulador en 0 al cambiar de grupo</p>
+<p>Cuando detectás el cambio de grupo, el dato que acabas de leer <strong>ya pertenece al nuevo grupo</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="cm">{ ❌ Incorrecto }</span>
+<span class="n">totalLocalidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span><span class="w">        </span><span class="cm">{ se pierde el primer dato del nuevo grupo }</span>
+
+<span class="cm">{ ✅ Correcto }</span>
+<span class="n">totalLocalidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">precio</span><span class="o">;</span><span class="w">   </span><span class="cm">{ el dato actual ES el primero del nuevo grupo }</span>
+</code></pre></div>
+</div>
+<hr />
+<div class="nav-links">
+<h2 id="clases-05_corte_control-anterior-ir-a-ejercicios"><a href="#clases-04_listas_enlazadas">⬅️ Anterior</a> | <a href="#ejercicios-ejercicios">🏋️ Ir a ejercicios</a></h2>
+</div></section></section><section class="print-page" id="ejercicios-ejercicios" heading-number="3"><h1 id="ejercicios-ejercicios-ejercicios">🏋️ Ejercicios</h1>
+<p>Los ejercicios están ordenados del más simple al más complejo. Intentá resolver cada uno antes de ver la solución.</p>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-1-estructuras-de-control">Ejercicio 1 — Estructuras de Control ⭐</h2>
+<p>Escribí un programa que lea legajos y notas de alumnos.<br />
+El programa termina cuando el legajo es <strong>0</strong>.<br />
+Para cada alumno, leer sus <strong>3 notas</strong> (reales entre 0 y 10) y mostrar su promedio.</p>
+<p><strong>Ejemplo:</strong>
+<div class="highlight"><pre><span></span><code>Legajo (0 para terminar): 12345
+Nota 1: 7
+Nota 2: 8
+Nota 3: 6
+Promedio alumno 12345: 7.00
+Legajo (0 para terminar): 0
+</code></pre></div></p>
+<details class="tip">
+<summary>💡 Pista</summary>
+<p>¿Qué estructura de repetición corresponde usar si no sabés cuántos alumnos hay?<br />
+¿Dónde va el primer <code>readln(legajo)</code>?</p>
+</details>
+<details class="success">
+<summary>✅ Solución</summary>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">PromedioAlumnos</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">legajo</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">nota1</span><span class="o">,</span><span class="w"> </span><span class="n">nota2</span><span class="o">,</span><span class="w"> </span><span class="n">nota3</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">legajo</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 1: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota1</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 2: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 3: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nota3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">promedio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">nota1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">nota3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Promedio alumno &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">legajo</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">promedio</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Legajo (0 para terminar): &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">legajo</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-2-modularizacion">Ejercicio 2 — Modularización ⭐⭐</h2>
+<p>Implementar los siguientes módulos:</p>
+<ul>
+<li><code>function calcularPromedio(n1, n2, n3: real): real</code> — devuelve el promedio de 3 notas</li>
+<li><code>function estaAprobado(prom: real): boolean</code> — devuelve <code>true</code> si el promedio es &gt;= 6</li>
+<li><code>procedure informarResultado(nombre: string; n1, n2, n3: real)</code> — usa las dos funciones anteriores e imprime el resultado del alumno</li>
+</ul>
+<p>Luego escribir un programa principal que lea datos de <strong>5 alumnos</strong> y llame al procedimiento para cada uno.</p>
+<div class="admonition question">
+<p class="admonition-title">Para pensar antes de escribir</p>
+<ul>
+<li>¿Qué parámetros necesitan <code>var</code> y cuáles no?</li>
+<li>¿Podría <code>calcularPromedio</code> ser un <code>procedure</code>? ¿Qué tendría que cambiar?</li>
+</ul>
+</div>
+<details class="success">
+<summary>✅ Solución</summary>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">Modularizacion</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">calcularPromedio</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">(</span><span class="n">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">estaAprobado</span><span class="p">(</span><span class="n">prom</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">estaAprobado</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">prom</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">6.0</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">informarResultado</span><span class="p">(</span><span class="n">nombre</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span><span class="w"> </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">prom</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">prom</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Alumno: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; — Promedio: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">prom</span><span class="o">:</span><span class="mi">5</span><span class="o">:</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; — &#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">estaAprobado</span><span class="p">(</span><span class="n">prom</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;APROBADO&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;DESAPROBADO&#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">var</span>
+<span class="w">  </span><span class="n">i</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">nombre</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">  </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nombre: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 1: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 2: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">write</span><span class="p">(</span><span class="s">&#39;Nota 3: &#39;</span><span class="p">)</span><span class="o">;</span><span class="w"> </span><span class="nb">readln</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">informarResultado</span><span class="p">(</span><span class="n">nombre</span><span class="o">,</span><span class="w"> </span><span class="n">n1</span><span class="o">,</span><span class="w"> </span><span class="n">n2</span><span class="o">,</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-3-vectores-y-registros">Ejercicio 3 — Vectores y Registros ⭐⭐</h2>
+<p>Definir un tipo <code>TEmpleado</code> con los campos: <code>nombre</code> (string), <code>categoria</code> (char: A..E) y <code>salario</code> (real).</p>
+<ol>
+<li>Leer hasta 100 empleados (terminar cuando el nombre sea <code>'FIN'</code>)</li>
+<li>Implementar un <strong>procedimiento</strong> <code>contarPorCategoria</code> que reciba el vector y la cantidad, y llene un vector contador con cuántos hay por categoría</li>
+<li>Imprimir los contadores para A, B, C, D y E</li>
+</ol>
+<details class="tip">
+<summary>💡 Pista</summary>
+<p>Un vector contador puede indexarse directamente con un <code>char</code>: <code>cont['A']</code>, <code>cont['B']</code>, etc.
+<div class="highlight"><pre><span></span><code><span class="k">type</span><span class="w"> </span><span class="n">TContadores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;E&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+</code></pre></div></p>
+</details>
+<details class="success">
+<summary>✅ Solución</summary>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">Empleados</span><span class="o">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="nb">MAX</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="o">;</span>
+<span class="k">type</span>
+<span class="w">  </span><span class="n">TEmpleado</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">nombre</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">    </span><span class="n">categoria</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span>
+<span class="w">    </span><span class="n">salario</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="w">  </span><span class="n">TEmpleados</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="mi">1</span><span class="o">..</span><span class="n">MAX</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">TEmpleado</span><span class="o">;</span>
+<span class="w">  </span><span class="n">TContadores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">array</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="o">..</span><span class="s">&#39;E&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">contarPorCategoria</span><span class="p">(</span><span class="n">emp</span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleados</span><span class="o">;</span><span class="w"> </span><span class="n">n</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">cont</span><span class="o">:</span><span class="w"> </span><span class="n">TContadores</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span><span class="w"> </span><span class="n">c</span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s">&#39;E&#39;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">cont</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">cont</span><span class="p">[</span><span class="n">emp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">cont</span><span class="p">[</span><span class="n">emp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">var</span>
+<span class="w">  </span><span class="n">emp</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">TEmpleados</span><span class="o">;</span>
+<span class="w">  </span><span class="n">cont</span><span class="o">:</span><span class="w"> </span><span class="n">TContadores</span><span class="o">;</span>
+<span class="w">  </span><span class="n">n</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">  </span><span class="n">c</span><span class="w">   </span><span class="o">:</span><span class="w"> </span><span class="kt">char</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">emp</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">categoria</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">salario</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">emp</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">nombre</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="w">  </span><span class="n">contarPorCategoria</span><span class="p">(</span><span class="n">emp</span><span class="o">,</span><span class="w"> </span><span class="n">n</span><span class="o">,</span><span class="w"> </span><span class="n">cont</span><span class="p">)</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&#39;A&#39;</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s">&#39;E&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Categoría &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">c</span><span class="o">,</span><span class="w"> </span><span class="s">&#39;: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">cont</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; empleados&#39;</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-4-listas-enlazadas">Ejercicio 4 — Listas Enlazadas ⭐⭐⭐</h2>
+<p>Dado el tipo:
+<div class="highlight"><pre><span></span><code><span class="k">type</span>
+<span class="w">  </span><span class="n">PNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">^</span><span class="n">TNodo</span><span class="o">;</span>
+<span class="w">  </span><span class="n">TNodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">record</span>
+<span class="w">    </span><span class="n">valor</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="o">;</span>
+<span class="w">    </span><span class="n">siguiente</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+</code></pre></div></p>
+<p>Implementar:</p>
+<ol>
+<li><code>procedure contarElementos(lista: PNodo; var cant: integer)</code> — cuenta los nodos</li>
+<li><code>procedure mostrarLista(lista: PNodo)</code> — imprime todos los valores</li>
+<li><code>function buscarEnLista(lista: PNodo; x: integer): boolean</code> — devuelve <code>true</code> si el valor está</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">Para pensar</p>
+<p>¿Cuáles de estos tres módulos necesitan <code>lista</code> con <code>var</code>? ¿Por qué?</p>
+</div>
+<details class="success">
+<summary>✅ Solución</summary>
+<p><div class="highlight"><pre><span></span><code><span class="k">procedure</span><span class="w"> </span><span class="nf">contarElementos</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">cant</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">cant</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">cant</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">cant</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">;</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">procedure</span><span class="w"> </span><span class="nf">mostrarLista</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="p">)</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="nb">writeln</span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="p">)</span><span class="o">;</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">buscarEnLista</span><span class="p">(</span><span class="n">lista</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="o">;</span>
+<span class="k">var</span><span class="w"> </span><span class="n">actual</span><span class="o">:</span><span class="w"> </span><span class="n">PNodo</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">lista</span><span class="o">;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="o">^.</span><span class="n">valor</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="n">actual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="o">^.</span><span class="n">siguiente</span><span class="o">;</span>
+<span class="w">  </span><span class="n">buscarEnLista</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="k">nil</span><span class="o">;</span>
+<span class="k">end</span><span class="o">;</span>
+</code></pre></div>
+Ninguno necesita <code>var lista</code> porque ninguno modifica quién es la cabecera.
+<code>cant</code> sí necesita <code>var</code> porque es el valor que se devuelve.</p>
+</details>
+<hr />
+<h2 id="ejercicios-ejercicios-ejercicio-5-corte-de-control">Ejercicio 5 — Corte de Control ⭐⭐⭐</h2>
+<p>Se dispone de inmuebles <strong>ordenados por localidad</strong>. Cada línea tiene: localidad (string) y precio (real). La entrada termina con <code>'FIN'</code>.</p>
+<p>Escribir un programa que imprima el <strong>total de precios por localidad</strong> y al final el <strong>total general</strong>.</p>
+<p><strong>Datos de entrada:</strong>
+<div class="highlight"><pre><span></span><code>La Plata   150000
+La Plata   200000
+Berisso     90000
+Berisso    110000
+Berisso     75000
+Ensenada   130000
+FIN              0
+</code></pre></div></p>
+<p><strong>Salida esperada:</strong>
+<div class="highlight"><pre><span></span><code>Localidad: La Plata  - Total: $ 350000.00
+Localidad: Berisso   - Total: $ 275000.00
+Localidad: Ensenada  - Total: $ 130000.00
+Total general:        $ 755000.00
+</code></pre></div></p>
+<details class="tip">
+<summary>💡 Pista</summary>
+<p>Aplicar el patrón de corte de control. Acordate de:
+1. Leer el primer dato <strong>antes</strong> del while
+2. Al cambiar de grupo: informar el anterior, actualizar criterio, y poner <code>acumulador := precio</code> (no <code>:= 0</code>)
+3. Informar el <strong>último grupo</strong> después del while</p>
+</details>
+<details class="success">
+<summary>✅ Solución</summary>
+<div class="highlight"><pre><span></span><code><span class="k">program</span><span class="w"> </span><span class="n">CortePorLocalidad</span><span class="o">;</span>
+<span class="k">var</span>
+<span class="w">  </span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">:</span><span class="w"> </span><span class="k">string</span><span class="o">;</span>
+<span class="w">  </span><span class="n">precio</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="w"> </span><span class="kt">real</span><span class="o">;</span>
+<span class="k">begin</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="nb">readln</span><span class="p">(</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">localidadActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalLocalidad</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="o">;</span>
+
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="n">localidad</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&#39;FIN&#39;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">begin</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">localidad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">localidadActual</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">precio</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="k">begin</span>
+<span class="w">      </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; - Total: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalGeneral</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">localidadActual</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">localidad</span><span class="o">;</span>
+<span class="w">      </span><span class="n">totalLocalidad</span><span class="w">  </span><span class="o">:=</span><span class="w"> </span><span class="n">precio</span><span class="o">;</span>
+<span class="w">    </span><span class="k">end</span><span class="o">;</span>
+<span class="w">    </span><span class="nb">readln</span><span class="p">(</span><span class="n">localidad</span><span class="o">,</span><span class="w"> </span><span class="n">precio</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="k">end</span><span class="o">;</span>
+
+<span class="w">  </span><span class="cm">{ Último grupo }</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Localidad: &#39;</span><span class="o">,</span><span class="w"> </span><span class="n">localidadActual</span><span class="o">,</span><span class="w"> </span><span class="s">&#39; - Total: $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="w">  </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">totalGeneral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">totalLocalidad</span><span class="o">;</span>
+<span class="w">  </span><span class="nb">writeln</span><span class="p">(</span><span class="s">&#39;Total general:         $&#39;</span><span class="o">,</span><span class="w"> </span><span class="n">totalGeneral</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">2</span><span class="p">)</span><span class="o">;</span>
+<span class="k">end</span><span class="o">.</span>
+</code></pre></div>
+</details></section><section class="print-page" id="pythontutor-pythontutor" heading-number="4"><h1 id="pythontutor-pythontutor-python-tutor-visualizacion-en-c">🔬 Python Tutor — Visualización en C</h1>
+<p>Python Tutor no soporta Pascal, pero el modelo de memoria de <strong>C es idéntico al de Pascal</strong>. Los snippets de esta página pueden pegarse directamente en <a href="https://pythontutor.com/c.html">pythontutor.com/c.html</a> para visualizar paso a paso.</p>
+<table>
+<thead>
+<tr>
+<th>Pascal</th>
+<th>C equivalente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>record</code></td>
+<td><code>struct</code></td>
+</tr>
+<tr>
+<td><code>^TNodo</code> (puntero)</td>
+<td><code>struct Nodo*</code></td>
+</tr>
+<tr>
+<td><code>var x: integer</code> (VAR param)</td>
+<td><code>int* x</code></td>
+</tr>
+<tr>
+<td><code>new(p)</code></td>
+<td><code>p = malloc(sizeof(*p))</code></td>
+</tr>
+<tr>
+<td><code>p^.campo</code></td>
+<td><code>p-&gt;campo</code></td>
+</tr>
+<tr>
+<td><code>nil</code></td>
+<td><code>NULL</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pythontutor-pythontutor-var-vs-valor">VAR vs Valor</h2>
+<p>Pegá este código en <a href="https://pythontutor.com/c.html">pythontutor.com/c.html</a> y ejecutalo paso a paso. Observá cómo el stack frame de <code>porValor</code> tiene su propia copia de <code>x</code>, mientras que <code>porReferencia</code> trabaja directamente sobre la variable original.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cm">/* Por VALOR — recibe una copia */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">porValor</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99</span><span class="p">;</span><span class="w">  </span><span class="cm">/* solo cambia la copia local */</span>
+<span class="p">}</span>
+
+<span class="cm">/* Por REFERENCIA — recibe la dirección (equivalente a VAR en Pascal) */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">porReferencia</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99</span><span class="p">;</span><span class="w">  </span><span class="cm">/* cambia el original */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">porValor</span><span class="p">(</span><span class="n">a</span><span class="p">);</span><span class="w">        </span><span class="cm">/* a sigue siendo 5 */</span>
+<span class="w">    </span><span class="n">porReferencia</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="cm">/* b pasa a ser 99  */</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;a = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span><span class="w">  </span><span class="cm">/* 5  */</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;b = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">  </span><span class="cm">/* 99 */</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Equivalencia Pascal → C</p>
+<div class="highlight"><pre><span></span><code><span class="cm">{ Pascal }</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">porValor</span><span class="p">(</span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+<span class="k">procedure</span><span class="w"> </span><span class="nf">porReferencia</span><span class="p">(</span><span class="k">var</span><span class="w"> </span><span class="n">x</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="p">)</span><span class="o">;</span>
+
+<span class="cm">{ C equivalente }</span>
+<span class="n">void</span><span class="w"> </span><span class="n">porValor</span><span class="p">(</span><span class="nb">int</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="o">;</span>
+<span class="n">void</span><span class="w"> </span><span class="n">porReferencia</span><span class="p">(</span><span class="nb">int</span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="o">;</span>
+</code></pre></div>
+</div>
+<hr />
+<h2 id="pythontutor-pythontutor-listas-enlazadas">Listas Enlazadas — addFirst</h2>
+<p>Visualiza cómo cada <code>addFirst</code> crea un nuevo nodo en el heap y actualiza el puntero cabecera. Es el mismo comportamiento que en Pascal.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="cm">/* Equivalente a: procedure addFirst(var lista: PNodo; valor: integer) */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span>
+<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">   </span><span class="cm">/* lista := nil */</span>
+
+<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* La lista quedó: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
+<span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Qué observar en Python Tutor</p>
+<ul>
+<li>Cada <code>addFirst</code> agrega un frame nuevo en el <strong>stack</strong> y un nodo en el <strong>heap</strong></li>
+<li>El doble puntero <code>**lista</code> en C corresponde al <code>var lista: PNodo</code> en Pascal</li>
+<li>Al salir de <code>addFirst</code>, el heap conserva el nodo — la memoria dinámica persiste</li>
+</ul>
+</div>
+<hr />
+<h2 id="pythontutor-pythontutor-insertar-en-el-medio">Listas Enlazadas — Insertar en el medio</h2>
+<p>Este snippet muestra el paso crítico: el <strong>orden</strong> en que se reasignan los punteros.<br />
+Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">siguiente</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">addFirst</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">**</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valor</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">lista</span><span class="p">;</span>
+<span class="w">    </span><span class="o">*</span><span class="n">lista</span><span class="w">           </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*</span>
+<span class="cm"> * Equivalente Pascal:</span>
+<span class="cm"> *   procedure insertarDespuesDe(lista: PNodo; valorBuscar, valorNuevo: integer)</span>
+<span class="cm"> *</span>
+<span class="cm"> * lista NO es doble puntero porque no cambia la cabecera.</span>
+<span class="cm"> */</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">insertarDespuesDe</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* 1. Buscar el nodo de referencia */</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">valorBuscar</span><span class="p">)</span>
+<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* 2. Insertar después si se encontró */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="p">));</span>
+<span class="w">        </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">valor</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">valorNuevo</span><span class="p">;</span>
+<span class="w">        </span><span class="n">nuevo</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span><span class="w"> </span><span class="cm">/* paso 1: NUEVO apunta al siguiente */</span>
+<span class="w">        </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nuevo</span><span class="p">;</span><span class="w">             </span><span class="cm">/* paso 2: anterior apunta al NUEVO  */</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">mostrar</span><span class="p">(</span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lista</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">);</span>
+<span class="w">        </span><span class="n">actual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">actual</span><span class="o">-&gt;</span><span class="n">siguiente</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Nodo</span><span class="o">*</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/* Armar lista: 10 -&gt; 30 -&gt; NULL */</span>
+<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">);</span>
+<span class="w">    </span><span class="n">addFirst</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 30 */</span>
+
+<span class="w">    </span><span class="cm">/* Insertar 20 después del 10: 10 -&gt; 20 -&gt; 30 -&gt; NULL */</span>
+<span class="w">    </span><span class="n">insertarDespuesDe</span><span class="p">(</span><span class="n">lista</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="n">mostrar</span><span class="p">(</span><span class="n">lista</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 10 20 30 */</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Qué observar en Python Tutor</p>
+<ul>
+<li>Cuando <code>insertarDespuesDe</code> empieza, <code>lista</code> <strong>no es doble puntero</strong> — la cabecera no cambia</li>
+<li>Fijate el estado del heap <strong>entre el paso 1 y el paso 2</strong>: <code>nuevo-&gt;siguiente</code> ya apunta a <code>30</code>, pero <code>10-&gt;siguiente</code> todavía apunta a <code>30</code> también — ambos apuntan al mismo nodo momentáneamente</li>
+<li>Después del paso 2: <code>10-&gt;siguiente</code> pasa a apuntar a <code>NUEVO (20)</code>, y la cadena queda correcta</li>
+<li>Si invirtieras los pasos, en el paso 1 <code>actual-&gt;siguiente</code> ya sería <code>nuevo</code>, y <code>nuevo-&gt;siguiente = actual-&gt;siguiente</code> asignaría <code>nuevo</code> a sí mismo — bucle infinito</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Equivalencia Pascal → C para el doble puntero</p>
+<p><div class="highlight"><pre><span></span><code>Pascal: var lista: PNodo      →  C: struct Nodo** lista
+Pascal: lista (sin var)       →  C: struct Nodo*  lista
+</code></pre></div>
+En <code>insertarDespuesDe</code> la cabecera no cambia, así que en C alcanza con <code>struct Nodo*</code> (un solo nivel de indirección).</p>
+</div>
+<hr />
+<h2 id="pythontutor-pythontutor-registros">Registros — struct con campos</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="cm">/* Pascal: TAlumno = record nombre: string; promedio: real; end */</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Alumno</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="n">nombre</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">promedio</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kt">double</span><span class="w"> </span><span class="nf">calcularPromedio</span><span class="p">(</span><span class="kt">double</span><span class="w"> </span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">n1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n3</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">Alumno</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">n1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">7.0</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">8.0</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">a</span><span class="p">.</span><span class="n">promedio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calcularPromedio</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="w"> </span><span class="n">n2</span><span class="p">,</span><span class="w"> </span><span class="n">n3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;Promedio: %.2f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">promedio</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></section></div><style>.print-site-enumerate-headings #index > h1:before { content: '1 ' }
+
+                .print-site-enumerate-headings #index h2:before { content: '1.' counter(counter-index-2) ' ' }
+                .print-site-enumerate-headings #index h2 {  counter-increment: counter-index-2 }
+            
+.print-site-enumerate-headings #section-2 > h1:before { content: '2 ' }
+.print-site-enumerate-headings #clases-01_estructuras_control > h1:before { content: '2.1 ' }
+
+.print-site-enumerate-headings #clases-02_modularizacion > h1:before { content: '2.2 ' }
+
+.print-site-enumerate-headings #clases-03_vectores_registros > h1:before { content: '2.3 ' }
+
+.print-site-enumerate-headings #clases-04_listas_enlazadas > h1:before { content: '2.4 ' }
+
+.print-site-enumerate-headings #clases-05_corte_control > h1:before { content: '2.5 ' }
+
+.print-site-enumerate-headings #ejercicios-ejercicios > h1:before { content: '3 ' }
+
+                .print-site-enumerate-headings #ejercicios-ejercicios h2:before { content: '3.' counter(counter-ejercicios-ejercicios-2) ' ' }
+                .print-site-enumerate-headings #ejercicios-ejercicios h2 {  counter-increment: counter-ejercicios-ejercicios-2 }
+            
+.print-site-enumerate-headings #pythontutor-pythontutor > h1:before { content: '4 ' }
+
+                .print-site-enumerate-headings #pythontutor-pythontutor h2:before { content: '4.' counter(counter-pythontutor-pythontutor-2) ' ' }
+                .print-site-enumerate-headings #pythontutor-pythontutor h2 {  counter-increment: counter-pythontutor-pythontutor-2 }
+            </style>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": "content.code.copy", "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+    
+  </body>
+</html>
