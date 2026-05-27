@@ -20,6 +20,18 @@ theme:
 
   features: content.code.copy
 
+plugins:
+  - search
+  - print-site:
+      add_to_navigation: true
+      print_page_title: '📄 Todo en una página'
+      add_table_of_contents: true
+      toc_title: 'Contenido'
+      toc_depth: 2
+      add_full_urls: false
+      enumerate_headings: false
+      enumerate_figures: false
+
 markdown_extensions:
   - admonition
   - attr_list

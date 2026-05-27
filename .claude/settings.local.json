@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-Item \"d:\\\\Dev\\\\pascal_particular\\\\site\\\\print_page\\\\index.html\" | Select-Object Name, @{N='KB';E={[math]::Round\\($_.Length/1KB\\)}})"
+    ]
+  }
+}
