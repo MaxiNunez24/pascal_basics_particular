@@ -221,79 +221,95 @@ end;
 |---|---|---|
 | Tamaño | Fijo (MAX) | Dinámico |
 | Acceso | Directo por índice | Secuencial (recorrer) |
-| Inserción | Costosa (desplazar) | Barata (cambiar punteros) |
+| Inserción | Costosa (desplazar) | Barata |
 
-**Declaración tipo** (siempre en este orden):
+**Librería GenericLinkedList** — se importa y se especializa para el tipo que necesitamos:
 ```pascal
+uses GenericLinkedList;
 type
-  PNodo = ^TNodo;   { primero el puntero }
-  TNodo = record
-    dato: TipoDato;
-    siguiente: PNodo;
-  end;
+  ListaE = specialize LinkedList<integer>;
+  { Para registros: specialize LinkedList<TInmueble> }
 ```
 
-**Agregar adelante — addFirst:**
+**Crear + agregar:**
 ```pascal
-procedure addFirst(var lista: PNodo; dato: TipoDato);
-var nuevo: PNodo;
+var L: ListaE;
 begin
-  new(nuevo);
-  nuevo^.dato := dato;
-  nuevo^.siguiente := lista;  { el nuevo apunta al que era cabecera }
-  lista := nuevo;             { la nueva cabecera es el nuevo nodo }
+  L := ListaE.create();  { lista vacía }
+  L.add(10);             { agrega al final }
+  L.addFirst(10);        { agrega al inicio }
+end.
+```
+
+**Patrón de recorrido — los 4 métodos:**
+```pascal
+L.reset();
+while not L.eol() do
+begin
+  { procesar L.current() }
+  L.next();
 end;
 ```
-⚠️ `lista` va con `var` porque se modifica la cabecera.
+⚠️ Si se olvida `L.next()` → bucle infinito.
 
-**Agregar al final — add:**
+**Regla VAR para listas:**
+- `var L` → el módulo ejecuta `L := ListaE.create()` (reasigna la variable)
+- Sin `var` → el módulo solo llama métodos (`reset`, `add`, `current`, etc.)
+
+**armarLista (con VAR):**
 ```pascal
-procedure add(var lista: PNodo; dato: TipoDato);
-var nuevo, actual: PNodo;
+procedure armarLista(var L: ListaE);
+var num: integer;
 begin
-  new(nuevo);
-  nuevo^.dato := dato;
-  nuevo^.siguiente := nil;
-  if lista = nil then
-    lista := nuevo
-  else
+  L := ListaE.create();
+  read(num);
+  while num <> -1 do
   begin
-    actual := lista;
-    while actual^.siguiente <> nil do
-      actual := actual^.siguiente;
-    actual^.siguiente := nuevo;
+    L.add(num);
+    read(num);
   end;
 end;
 ```
 
-**Patrón para recorrer una lista:**
+**sumarLista (sin VAR):**
 ```pascal
-actual := lista;
-while actual <> nil do
+function sumarLista(L: ListaE): integer;
+var suma: integer;
 begin
-  { procesar actual^.dato }
-  actual := actual^.siguiente;
+  suma := 0;
+  L.reset();
+  while not L.eol() do
+  begin
+    suma := suma + L.current();
+    L.next();
+  end;
+  sumarLista := suma;
 end;
 ```
 
 ### Ejercicio 4 para el alumno (5 min)
-*(ver `ejercicios_alumno.md` — Ejercicio 4)*
+*(ver ejercicios — Ejercicio 4)*
+
+Pedir que escriba `buscarEnLista(L: ListaE; x: integer): boolean`.
 
 **Solución:**
 ```pascal
-procedure contarElementos(lista: PNodo; var cant: integer);
-var actual: PNodo;
+function buscarEnLista(L: ListaE; x: integer): boolean;
+var encontrado: boolean;
 begin
-  cant := 0;
-  actual := lista;
-  while actual <> nil do
+  encontrado := false;
+  L.reset();
+  while (not L.eol()) and (not encontrado) do
   begin
-    cant := cant + 1;
-    actual := actual^.siguiente;
+    if L.current() = x then
+      encontrado := true
+    else
+      L.next();
   end;
+  buscarEnLista := encontrado;
 end;
 ```
-Notar que `lista` NO va con `var` (no modifica la cabecera, solo lee).
+Preguntar: "¿Va `var L`?" → No, porque no reasigna L.
 
 ---
 
@@ -382,7 +398,7 @@ end.
 1. **No variables globales** — todo por parámetros
 2. **WHILE con centinela** — el primer `read` va afuera del loop
 3. **Búsqueda en vector ordenado** — parar si el elemento actual ya superó al buscado
-4. **Listas** — `lista` va con `var` solo cuando se modifica la cabecera
+4. **Listas** — `var L` solo cuando el módulo reasigna L con `create()`, no cuando solo llama métodos
 5. **Corte de control** — siempre informar el último grupo después del `while`
 
 ### Darle al alumno el archivo `resumen_parcial.md` para imprimir o abrir en pantalla.

@@ -56,9 +56,9 @@ int main() {
 
 ---
 
-## Listas Enlazadas — addFirst {#listas-enlazadas}
+## Listas Enlazadas — cómo funciona internamente {#listas-enlazadas}
 
-Visualiza cómo cada `addFirst` crea un nuevo nodo en el heap y actualiza el puntero cabecera. Es el mismo comportamiento que en Pascal.
+`GenericLinkedList` oculta los punteros, pero por dentro la lista es exactamente esto: nodos en el **heap** encadenados por punteros. Este snippet muestra cómo funciona `add` y el recorrido internamente — útil para entender por qué el recorrido es secuencial y no por índice.
 
 ```c
 #include <stdio.h>
@@ -69,28 +69,37 @@ struct Nodo {
     struct Nodo* siguiente;
 };
 
-/* Equivalente a: procedure addFirst(var lista: PNodo; valor: integer) */
-void addFirst(struct Nodo** lista, int valor) {
+/* Lo que hace L.add(valor) por dentro */
+void add(struct Nodo** lista, int valor) {
     struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
     nuevo->valor     = valor;
-    nuevo->siguiente = *lista;
-    *lista           = nuevo;
+    nuevo->siguiente = NULL;
+
+    if (*lista == NULL) {
+        *lista = nuevo;
+    } else {
+        struct Nodo* actual = *lista;
+        while (actual->siguiente != NULL)
+            actual = actual->siguiente;
+        actual->siguiente = nuevo;
+    }
 }
 
+/* Lo que hace el patrón reset/eol/current/next por dentro */
 void mostrar(struct Nodo* lista) {
-    struct Nodo* actual = lista;
-    while (actual != NULL) {
-        printf("%d\n", actual->valor);
-        actual = actual->siguiente;
+    struct Nodo* actual = lista;   /* reset: ir al primero */
+    while (actual != NULL) {       /* eol: llegamos al final? */
+        printf("%d\n", actual->valor);   /* current */
+        actual = actual->siguiente;      /* next */
     }
 }
 
 int main() {
-    struct Nodo* lista = NULL;   /* lista := nil */
+    struct Nodo* lista = NULL;   /* L := ListaE.create() */
 
-    addFirst(&lista, 30);
-    addFirst(&lista, 20);
-    addFirst(&lista, 10);
+    add(&lista, 10);
+    add(&lista, 20);
+    add(&lista, 30);
 
     /* La lista quedó: 10 -> 20 -> 30 -> NULL */
     mostrar(lista);
@@ -99,16 +108,17 @@ int main() {
 ```
 
 !!! tip "Qué observar en Python Tutor"
-    - Cada `addFirst` agrega un frame nuevo en el **stack** y un nodo en el **heap**
-    - El doble puntero `**lista` en C corresponde al `var lista: PNodo` en Pascal
-    - Al salir de `addFirst`, el heap conserva el nodo — la memoria dinámica persiste
+    - Cada `add` crea un nuevo nodo en el **heap** y lo enlaza al final
+    - El heap conserva los nodos después de que `add` retorna — la memoria dinámica persiste
+    - `mostrar` recorre secuencialmente siguiendo punteros — no hay acceso directo por índice
+    - Esto es exactamente lo que `GenericLinkedList` hace por debajo cuando usás `reset/eol/current/next`
 
 ---
 
-## Listas Enlazadas — Insertar en el medio {#insertar-en-el-medio}
+## Listas Enlazadas — por qué el orden de los pasos importa {#insertar-en-el-medio}
 
-Este snippet muestra el paso crítico: el **orden** en que se reasignan los punteros.  
-Ejecutalo paso a paso y observá cómo el heap cambia en cada asignación.
+Este snippet muestra el paso crítico al insertar en el medio: el **orden** en que se reasignan los punteros.  
+`GenericLinkedList` lo hace por vos, pero entender esto ayuda a razonar sobre el comportamiento de la lista.
 
 ```c
 #include <stdio.h>
@@ -119,26 +129,29 @@ struct Nodo {
     struct Nodo* siguiente;
 };
 
-void addFirst(struct Nodo** lista, int valor) {
+void add(struct Nodo** lista, int valor) {
     struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
     nuevo->valor     = valor;
-    nuevo->siguiente = *lista;
-    *lista           = nuevo;
+    nuevo->siguiente = NULL;
+    if (*lista == NULL) {
+        *lista = nuevo;
+    } else {
+        struct Nodo* actual = *lista;
+        while (actual->siguiente != NULL)
+            actual = actual->siguiente;
+        actual->siguiente = nuevo;
+    }
 }
 
 /*
- * Equivalente Pascal:
- *   procedure insertarDespuesDe(lista: PNodo; valorBuscar, valorNuevo: integer)
- *
- * lista NO es doble puntero porque no cambia la cabecera.
+ * Insertar un nodo DESPUÉS del nodo que tiene 'valorBuscar'.
+ * La cabecera no cambia → un solo puntero (no doble).
  */
 void insertarDespuesDe(struct Nodo* lista, int valorBuscar, int valorNuevo) {
-    /* 1. Buscar el nodo de referencia */
     struct Nodo* actual = lista;
     while (actual != NULL && actual->valor != valorBuscar)
         actual = actual->siguiente;
 
-    /* 2. Insertar después si se encontró */
     if (actual != NULL) {
         struct Nodo* nuevo = (struct Nodo*)malloc(sizeof(struct Nodo));
         nuevo->valor      = valorNuevo;
@@ -159,12 +172,10 @@ void mostrar(struct Nodo* lista) {
 int main() {
     struct Nodo* lista = NULL;
 
-    /* Armar lista: 10 -> 30 -> NULL */
-    addFirst(&lista, 30);
-    addFirst(&lista, 10);
+    add(&lista, 10);
+    add(&lista, 30);
     mostrar(lista);   /* 10 30 */
 
-    /* Insertar 20 después del 10: 10 -> 20 -> 30 -> NULL */
     insertarDespuesDe(lista, 10, 20);
     mostrar(lista);   /* 10 20 30 */
 
@@ -173,17 +184,9 @@ int main() {
 ```
 
 !!! tip "Qué observar en Python Tutor"
-    - Cuando `insertarDespuesDe` empieza, `lista` **no es doble puntero** — la cabecera no cambia
     - Fijate el estado del heap **entre el paso 1 y el paso 2**: `nuevo->siguiente` ya apunta a `30`, pero `10->siguiente` todavía apunta a `30` también — ambos apuntan al mismo nodo momentáneamente
     - Después del paso 2: `10->siguiente` pasa a apuntar a `NUEVO (20)`, y la cadena queda correcta
     - Si invirtieras los pasos, en el paso 1 `actual->siguiente` ya sería `nuevo`, y `nuevo->siguiente = actual->siguiente` asignaría `nuevo` a sí mismo — bucle infinito
-
-!!! warning "Equivalencia Pascal → C para el doble puntero"
-    ```
-    Pascal: var lista: PNodo      →  C: struct Nodo** lista
-    Pascal: lista (sin var)       →  C: struct Nodo*  lista
-    ```
-    En `insertarDespuesDe` la cabecera no cambia, así que en C alcanza con `struct Nodo*` (un solo nivel de indirección).
 
 ---
 

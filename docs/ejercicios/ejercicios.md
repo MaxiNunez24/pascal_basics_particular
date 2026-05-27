@@ -170,61 +170,68 @@ Definir un tipo `TEmpleado` con los campos: `nombre` (string), `categoria` (char
 
 ## Ejercicio 4 — Listas Enlazadas ⭐⭐⭐
 
-Dado el tipo:
+Usar la librería `GenericLinkedList` con una lista de enteros:
+
 ```pascal
+uses GenericLinkedList;
 type
-  PNodo = ^TNodo;
-  TNodo = record
-    valor    : integer;
-    siguiente: PNodo;
-  end;
+  ListaE = specialize LinkedList<integer>;
 ```
 
 Implementar:
 
-1. `procedure contarElementos(lista: PNodo; var cant: integer)` — cuenta los nodos
-2. `procedure mostrarLista(lista: PNodo)` — imprime todos los valores
-3. `function buscarEnLista(lista: PNodo; x: integer): boolean` — devuelve `true` si el valor está
+1. `procedure armarLista(var L: ListaE)` — lee enteros hasta leer `-1` y los agrega a la lista
+2. `function sumarLista(L: ListaE): integer` — retorna la suma de todos los elementos
+3. `function buscarEnLista(L: ListaE; x: integer): boolean` — devuelve `true` si el valor está
 
 !!! question "Para pensar"
-    ¿Cuáles de estos tres módulos necesitan `lista` con `var`? ¿Por qué?
+    - ¿Por qué `armarLista` necesita `var L` y `sumarLista` no?
+    - ¿Qué patrón de recorrido usás en `sumarLista` y `buscarEnLista`?
 
 ??? success "✅ Solución"
     ```pascal
-    procedure contarElementos(lista: PNodo; var cant: integer);
-    var actual: PNodo;
+    procedure armarLista(var L: ListaE);
+    var num: integer;
     begin
-      cant   := 0;
-      actual := lista;
-      while actual <> nil do
+      L := ListaE.create();
+      read(num);
+      while num <> -1 do
       begin
-        cant   := cant + 1;
-        actual := actual^.siguiente;
+        L.add(num);
+        read(num);
       end;
     end;
 
-    procedure mostrarLista(lista: PNodo);
-    var actual: PNodo;
+    function sumarLista(L: ListaE): integer;
+    var suma: integer;
     begin
-      actual := lista;
-      while actual <> nil do
+      suma := 0;
+      L.reset();
+      while not L.eol() do
       begin
-        writeln(actual^.valor);
-        actual := actual^.siguiente;
+        suma := suma + L.current();
+        L.next();
       end;
+      sumarLista := suma;
     end;
 
-    function buscarEnLista(lista: PNodo; x: integer): boolean;
-    var actual: PNodo;
+    function buscarEnLista(L: ListaE; x: integer): boolean;
+    var encontrado: boolean;
     begin
-      actual := lista;
-      while (actual <> nil) and (actual^.valor <> x) do
-        actual := actual^.siguiente;
-      buscarEnLista := actual <> nil;
+      encontrado := false;
+      L.reset();
+      while (not L.eol()) and (not encontrado) do
+      begin
+        if L.current() = x then
+          encontrado := true
+        else
+          L.next();
+      end;
+      buscarEnLista := encontrado;
     end;
     ```
-    Ninguno necesita `var lista` porque ninguno modifica quién es la cabecera.
-    `cant` sí necesita `var` porque es el valor que se devuelve.
+    `armarLista` necesita `var L` porque reasigna la variable con `ListaE.create()`.
+    Los otros dos solo llaman métodos — no reasignan `L`, no necesitan `var`.
 
 ---
 

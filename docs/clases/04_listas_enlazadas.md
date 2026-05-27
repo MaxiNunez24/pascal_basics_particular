@@ -10,212 +10,202 @@ A diferencia de los vectores, las listas no tienen tamaño fijo: crecen y se ach
 |---|---|---|
 | Tamaño | Fijo (`MAX`) declarado en compilación | Dinámico — crece en ejecución |
 | Acceso | Directo por índice: `v[5]` | Secuencial — hay que recorrer |
-| Inserción al inicio | Costosa (hay que desplazar todos) | Barata (solo cambiar punteros) |
+| Inserción al inicio | Costosa (hay que desplazar todos) | Barata |
 
 ---
 
-## Estructura de un nodo
+## La librería GenericLinkedList
 
-```mermaid
-graph LR
-    n1["valor: 10\nsiguiente: ●"] -->|"●"| n2
-    n2["valor: 20\nsiguiente: ●"] -->|"●"| n3
-    n3["valor: 30\nsiguiente: nil"] -->|"nil"| nil["∅"]
+En AyPI UNLP las listas se trabajan con la librería `GenericLinkedList`. Ella provee la estructura y los métodos — no hace falta manejar punteros manualmente.
 
-    lista["lista (PNodo)"] --> n1
-
-    style nil fill:#eee,stroke:#aaa
-```
+### Importar y declarar el tipo
 
 ```pascal
-type
-  PNodo = ^TNodo;    { primero el puntero — forward declaration }
-  TNodo = record
-    valor    : integer;
-    siguiente: PNodo;
-  end;
+uses GenericLinkedList;
 
-var lista: PNodo;
+type
+  ListaEnteros = specialize LinkedList<integer>;
+  { Para listas de registros: specialize LinkedList<TInmueble> }
+```
+
+### Crear una lista vacía
+
+```pascal
+var L: ListaEnteros;
 begin
-  lista := nil;   { lista vacía }
+  L := ListaEnteros.create();  { lista vacía }
 end.
 ```
 
-!!! warning "El orden de declaración importa"
-    `PNodo = ^TNodo` siempre va **antes** que `TNodo = record`. Pascal necesita que el tipo puntero esté declarado antes que el registro que lo usa internamente.
+---
+
+## Agregar elementos
+
+```pascal
+L.add(elemento);       { agrega AL FINAL }
+L.addFirst(elemento);  { agrega AL INICIO }
+```
+
+```pascal
+{ Ejemplo: construir la lista 10 → 20 → 30 con add }
+L := ListaEnteros.create();
+L.add(10);
+L.add(20);
+L.add(30);
+{ Resultado: 10 → 20 → 30 }
+```
 
 ---
 
-## Agregar al inicio — addFirst
+## Recorrer una lista — el patrón
 
-El nuevo nodo se convierte en la nueva cabecera.
+Cuatro métodos que siempre se usan juntos:
+
+| Método | Qué hace |
+|---|---|
+| `L.reset()` | Mueve el cursor al **primer** elemento |
+| `L.eol()` | Devuelve `true` si llegamos al **final** (*end of list*) |
+| `L.current()` | Devuelve el elemento en la posición actual |
+| `L.next()` | Avanza el cursor al siguiente elemento |
 
 ```mermaid
-graph LR
-    subgraph "Antes"
-        lista1["lista"] --> a1["10"] --> b1["20"] --> nil1["nil"]
-    end
-    subgraph "Después de addFirst(5)"
-        lista2["lista"] --> nuevo["5 ← NUEVO"] --> a2["10"] --> b2["20"] --> nil2["nil"]
-    end
+flowchart LR
+    R["L.reset()"] --> C{"L.eol()?"}
+    C -->|"Sí — fin"| FIN([Terminar])
+    C -->|"No"| P["procesar\nL.current()"]
+    P --> N["L.next()"]
+    N --> C
 ```
 
 ```pascal
-procedure addFirst(var lista: PNodo; valor: integer);
-var nuevo: PNodo;
+L.reset();
+while not L.eol() do
 begin
-  new(nuevo);                    { 1. crear nodo en memoria }
-  nuevo^.valor     := valor;     { 2. asignar dato }
-  nuevo^.siguiente := lista;     { 3. el nuevo apunta al que era primero }
-  lista            := nuevo;     { 4. lista ahora apunta al nuevo }
+  writeln(L.current());   { usar el elemento actual }
+  L.next();               { avanzar al siguiente }
 end;
 ```
 
-!!! tip "¿Por qué lista va con VAR?"
-    Porque el procedimiento modifica **quién es la cabecera**. Si no fuera `var`, el programa principal nunca se enteraría del cambio.
+!!! warning "Olvidar L.next() — bucle infinito"
+    Si no llamás `L.next()` al final del cuerpo del `while`, el cursor nunca avanza y el programa se cuelga.
 
 ---
 
-## Agregar al final — add
+## Módulos típicos
+
+### armarLista — necesita VAR ⭐
 
 ```pascal
-procedure add(var lista: PNodo; valor: integer);
-var nuevo, actual: PNodo;
+{ VAR porque el procedimiento REASIGNA L con create() }
+procedure armarLista(var L: ListaEnteros);
+var num: integer;
 begin
-  new(nuevo);
-  nuevo^.valor     := valor;
-  nuevo^.siguiente := nil;
-
-  if lista = nil then
-    lista := nuevo              { lista estaba vacía }
-  else
+  L := ListaEnteros.create();
+  read(num);
+  while num <> -1 do
   begin
-    actual := lista;
-    while actual^.siguiente <> nil do   { llegar al último nodo }
-      actual := actual^.siguiente;
-    actual^.siguiente := nuevo;         { enlazar al final }
+    L.add(num);
+    read(num);
   end;
 end;
 ```
 
----
-
-## Recorrer una lista
+### recorrerLista — sin VAR
 
 ```pascal
-procedure mostrar(lista: PNodo);    { SIN var — no modifica la cabecera }
-var actual: PNodo;
+{ Sin VAR: solo llama métodos, no reasigna L }
+procedure recorrerLista(L: ListaEnteros);
 begin
-  actual := lista;
-  while actual <> nil do
+  L.reset();
+  while not L.eol() do
   begin
-    writeln(actual^.valor);
-    actual := actual^.siguiente;
+    write(L.current(), ' ');
+    L.next();
   end;
+  writeln;
 end;
 ```
 
-!!! info "¿Cuándo va VAR en los módulos de lista?"
-    | Módulo | ¿Modifica la cabecera? | ¿Usa VAR? |
-    |---|---|---|
-    | `addFirst` | Sí | ✅ |
-    | `add` (a lista vacía) | Sí | ✅ |
-    | `mostrar`, `buscar`, `contar` | No | ❌ |
-
----
-
-## Buscar en una lista
+### sumarLista — función sin VAR
 
 ```pascal
-function buscar(lista: PNodo; x: integer): boolean;
-var actual: PNodo;
+function sumarLista(L: ListaEnteros): integer;
+var suma: integer;
 begin
-  actual := lista;
-  while (actual <> nil) and (actual^.valor <> x) do
-    actual := actual^.siguiente;
-  buscar := actual <> nil;   { si salimos sin llegar a nil, lo encontramos }
-end;
-```
-
----
-
-## Insertar en el medio
-
-Insertar un nodo **después** de un nodo específico ya existente en la lista.
-
-El truco está en el **orden de los dos pasos** — si los invertís, perdés el resto de la lista.
-
-```mermaid
-graph LR
-    subgraph "① nuevo^.siguiente := actual^.siguiente"
-        A2["10\n(actual)"] --> B2["30"]
-        N2["NUEVO: 20"] -->|"siguiente"| B2
-    end
-
-    subgraph "② actual^.siguiente := nuevo"
-        A3["10"] -->|"siguiente"| N3["NUEVO: 20"]
-        N3 --> B3["30"]
-    end
-```
-
-!!! danger "El orden importa — no invertir los pasos"
-    ```pascal
-    { ✅ Correcto }
-    nuevo^.siguiente  := actual^.siguiente;  { 1ro: NUEVO apunta al siguiente }
-    actual^.siguiente := nuevo;              { 2do: anterior apunta al NUEVO }
-
-    { ❌ Incorrecto — perdés el resto de la lista }
-    actual^.siguiente := nuevo;              { actual ya no apunta a 30... }
-    nuevo^.siguiente  := actual^.siguiente;  { ...esto asigna nuevo a sí mismo }
-    ```
-
-```pascal
-{ Insertar un valor nuevo DESPUÉS del nodo que contiene 'valorBuscar' }
-procedure insertarDespuesDe(lista: PNodo; valorBuscar, valorNuevo: integer);
-var
-  nuevo, actual: PNodo;
-begin
-  { 1. Buscar el nodo de referencia }
-  actual := lista;
-  while (actual <> nil) and (actual^.valor <> valorBuscar) do
-    actual := actual^.siguiente;
-
-  { 2. Si lo encontramos, insertar después }
-  if actual <> nil then
+  suma := 0;
+  L.reset();
+  while not L.eol() do
   begin
-    new(nuevo);
-    nuevo^.valor      := valorNuevo;
-    nuevo^.siguiente  := actual^.siguiente;  { paso 1: enlazar hacia adelante }
-    actual^.siguiente := nuevo;              { paso 2: enlazar hacia atrás }
+    suma := suma + L.current();
+    L.next();
   end;
+  sumarLista := suma;
 end;
 ```
 
-!!! info "¿Por qué lista NO necesita VAR acá?"
-    Porque estamos insertando **en el medio**: la cabecera (`lista`) no cambia. Solo se modifican los punteros internos de nodos que ya existen. `lista` no necesita `var`.
-
-    Si quisiéramos insertar **antes del primero** (nuevo caso borde), ahí sí cambia la cabecera y necesitaríamos `var lista`.
-
 ---
 
-## ¿Cuándo va VAR? — tabla completa
+## ¿Cuándo va VAR? — la regla
 
-| Módulo | ¿Modifica la cabecera? | ¿Usa VAR? |
+!!! tip "Regla para listas con GenericLinkedList"
+    - **Con `var L`:** el módulo ejecuta `L := ListaTipo.create()` — está **reasignando** la variable.
+    - **Sin `var L`:** el módulo solo llama métodos (`L.reset()`, `L.add()`, `L.current()`…) — aunque cambien el contenido interno, la variable `L` no se reasigna.
+
+| Módulo | ¿Reasigna L? | ¿Usa VAR? |
 |---|---|---|
-| `addFirst` | Sí | ✅ |
-| `add` (lista vacía) | Sí | ✅ |
-| `add` (lista no vacía) | No | ❌ (pero se declara `var` por el caso vacío) |
-| `insertarDespuesDe` | No | ❌ |
-| `mostrar`, `buscar`, `contar` | No | ❌ |
+| `armarLista` | Sí (`L := ListaE.create()`) | ✅ |
+| `recorrerLista` | No | ❌ |
+| `sumarLista` | No | ❌ |
+| `buscarEnLista` | No | ❌ |
+
+!!! info "Las listas son objetos (tipos referencia)"
+    A diferencia de los vectores, las listas son un **tipo objeto**. Cuando pasás `L` sin `var`, el módulo y el programa principal comparten la **misma lista** en memoria — los métodos como `add()` sí modifican el contenido. Solo se necesita `var` cuando la propia variable se reasigna con `create()`.
+
+---
+
+## Lista de registros
+
+```pascal
+uses GenericLinkedList;
+
+type
+  TInmueble = record
+    localidad: string;
+    precio   : real;
+  end;
+  ListaInmuebles = specialize LinkedList<TInmueble>;
+
+procedure armarListaInmuebles(var L: ListaInmuebles);
+var inm: TInmueble;
+begin
+  L := ListaInmuebles.create();
+  readln(inm.localidad);
+  while inm.localidad <> 'FIN' do
+  begin
+    readln(inm.precio);
+    L.add(inm);
+    readln(inm.localidad);
+  end;
+end;
+
+procedure mostrarInmuebles(L: ListaInmuebles);
+var inm: TInmueble;
+begin
+  L.reset();
+  while not L.eol() do
+  begin
+    inm := L.current();
+    writeln(inm.localidad, ': $', inm.precio:10:2);
+    L.next();
+  end;
+end;
+```
 
 ---
 
 ## 🔬 Ver en Python Tutor
 
-→ [Snippet: addFirst paso a paso en memoria](../pythontutor/pythontutor.md#listas-enlazadas)  
-→ [Snippet: insertar en el medio](../pythontutor/pythontutor.md#insertar-en-el-medio)
-
----
+→ [Cómo funciona internamente una lista enlazada](../pythontutor/pythontutor.md#listas-enlazadas)
 
 <div class="nav-links" markdown="1">
 
