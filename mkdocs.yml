@@ -1,0 +1,47 @@
+site_name: AyPI — Parcial Pascal
+site_author: Maximiliano Nuñez
+
+extra_css:
+  - stylesheets/extra.css
+
+theme:
+  name: material
+  icon:
+    logo: material/code-braces
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Cambiar a modo claro
+
+  features: content.code.copy
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+nav:
+  - 🏠 Inicio: index.md
+  - 📚 Temas:
+    - 🔀 Estructuras de Control: clases/01_estructuras_control.md
+    - 🧩 Modularización: clases/02_modularizacion.md
+    - 📊 Vectores y Registros: clases/03_vectores_registros.md
+    - 🔗 Listas Enlazadas: clases/04_listas_enlazadas.md
+    - ✂️ Corte de Control: clases/05_corte_control.md
+  - 🏋️ Ejercicios: ejercicios/ejercicios.md
+  - 🔬 Python Tutor (C): pythontutor/pythontutor.md
