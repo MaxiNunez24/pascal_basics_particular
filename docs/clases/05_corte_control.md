@@ -104,6 +104,80 @@ end.
 
 ---
 
+## Variante con LinkedList
+
+Cuando los datos vienen en una lista en lugar de llegar por `readln`, el **patrón es idéntico** — solo cambia cómo se "lee" cada elemento.
+
+### Correspondencia entre los dos patrones
+
+| Patrón clásico (readln) | Patrón con LinkedList |
+|---|---|
+| `readln(localidad, precio)` antes del `while` | `L.reset()` + `inm := L.current()` |
+| `while localidad <> 'FIN' do` | `while not L.eol() do` |
+| Procesar `localidad` y `precio` | Procesar `L.current()` |
+| `readln(localidad, precio)` al final | `L.next()` al final |
+| Informar último grupo después del `while` | **Igual — no cambia** |
+
+### Código completo
+
+```pascal
+uses GenericLinkedList;
+
+type
+  TInmueble = record
+    localidad: string;
+    precio   : real;
+  end;
+  ListaInmuebles = specialize LinkedList<TInmueble>;
+
+{ Sin VAR: no reasigna L, solo lo recorre }
+procedure cortePorLocalidad(L: ListaInmuebles);
+var
+  inm            : TInmueble;
+  localidadActual: string;
+  totalLocalidad, totalGeneral: real;
+begin
+  totalGeneral := 0;
+
+  { Equivalente al "readln primer dato" del patrón clásico }
+  L.reset();
+  inm             := L.current();
+  localidadActual := inm.localidad;
+  totalLocalidad  := 0;
+
+  while not L.eol() do
+  begin
+    inm := L.current();
+    if inm.localidad = localidadActual then
+      totalLocalidad := totalLocalidad + inm.precio
+    else
+    begin
+      { cambio de grupo }
+      writeln('Localidad: ', localidadActual, ' $', totalLocalidad:10:2);
+      totalGeneral    := totalGeneral + totalLocalidad;
+      localidadActual := inm.localidad;
+      totalLocalidad  := inm.precio;
+    end;
+    L.next();   { equivalente al readln al final del while }
+  end;
+
+  { ⚠️ Último grupo — igual que siempre }
+  writeln('Localidad: ', localidadActual, ' $', totalLocalidad:10:2);
+  totalGeneral := totalGeneral + totalLocalidad;
+  writeln('Total general: $', totalGeneral:10:2);
+end;
+```
+
+!!! tip "Lo que NO cambia"
+    Los errores clásicos siguen siendo los mismos:
+    - Olvidar informar el último grupo después del `while`
+    - Reiniciar el acumulador en 0 en vez de asignar el dato actual al cambiar de grupo
+
+!!! warning "¿Va VAR en el parámetro L?"
+    No. `cortePorLocalidad` solo recorre la lista con `reset/eol/current/next` — no reasigna `L` con `create()`. Las reglas de VAR para listas son las mismas de siempre.
+
+---
+
 ---
 
 ## 🔬 Ver en Python Tutor

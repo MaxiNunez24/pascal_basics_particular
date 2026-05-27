@@ -299,3 +299,108 @@ Total general:        $ 755000.00
       writeln('Total general:         $', totalGeneral:10:2);
     end.
     ```
+
+---
+
+## Ejercicio 6 — Corte de Control sobre una Lista ⭐⭐⭐⭐
+
+Tenés una lista de inmuebles **ya armada y ordenada por localidad**:
+
+```pascal
+uses GenericLinkedList;
+
+type
+  TInmueble = record
+    localidad: string;
+    precio   : real;
+  end;
+  ListaInmuebles = specialize LinkedList<TInmueble>;
+```
+
+Implementar:
+
+1. `procedure armarLista(var L: ListaInmuebles)` — lee pares `localidad precio` hasta que `localidad = 'FIN'` y los agrega a la lista
+2. `procedure cortePorLocalidad(L: ListaInmuebles)` — imprime el total de precios por cada localidad y el total general
+
+**Ejemplo de entrada:**
+```
+La Plata 150000
+La Plata 200000
+Berisso 90000
+Berisso 110000
+Ensenada 130000
+FIN 0
+```
+
+**Salida esperada:**
+```
+Localidad: La Plata  $ 350000.00
+Localidad: Berisso   $ 200000.00
+Localidad: Ensenada  $ 130000.00
+Total general: $ 680000.00
+```
+
+!!! question "Para pensar"
+    - ¿Cuál de los dos módulos lleva `var L`? ¿Por qué?
+    - ¿Qué reemplaza al `readln` dentro del while? ¿Y al `readln` inicial antes del while?
+    - ¿Cambia algo en el manejo del último grupo respecto al patrón clásico?
+
+??? tip "💡 Pista"
+    El patrón del corte es exactamente el mismo. Solo cambiá:
+
+    | Antes | Ahora |
+    |---|---|
+    | `readln(localidad, precio)` | `inm := L.current()` + `L.next()` |
+    | `while localidad <> 'FIN'` | `while not L.eol()` |
+
+??? success "✅ Solución"
+    ```pascal
+    procedure armarLista(var L: ListaInmuebles);
+    var inm: TInmueble;
+    begin
+      L := ListaInmuebles.create();
+      readln(inm.localidad, inm.precio);
+      while inm.localidad <> 'FIN' do
+      begin
+        L.add(inm);
+        readln(inm.localidad, inm.precio);
+      end;
+    end;
+
+    procedure cortePorLocalidad(L: ListaInmuebles);
+    var
+      inm            : TInmueble;
+      localidadActual: string;
+      totalLocalidad, totalGeneral: real;
+    begin
+      totalGeneral := 0;
+
+      { Equivalente al "leer primer dato" — posicionar y leer sin avanzar }
+      L.reset();
+      inm             := L.current();
+      localidadActual := inm.localidad;
+      totalLocalidad  := 0;
+
+      while not L.eol() do
+      begin
+        inm := L.current();
+        if inm.localidad = localidadActual then
+          totalLocalidad := totalLocalidad + inm.precio
+        else
+        begin
+          writeln('Localidad: ', localidadActual, ' $', totalLocalidad:10:2);
+          totalGeneral    := totalGeneral + totalLocalidad;
+          localidadActual := inm.localidad;
+          totalLocalidad  := inm.precio;
+        end;
+        L.next();   { avanzar — equivalente al readln al final del while }
+      end;
+
+      { ⚠️ Último grupo — igual que siempre }
+      writeln('Localidad: ', localidadActual, ' $', totalLocalidad:10:2);
+      totalGeneral := totalGeneral + totalLocalidad;
+      writeln('Total general: $', totalGeneral:10:2);
+    end;
+    ```
+    `armarLista` lleva `var L` porque ejecuta `ListaInmuebles.create()`.
+    `cortePorLocalidad` no lleva `var` porque solo recorre — no reasigna `L`.
