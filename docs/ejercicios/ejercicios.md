@@ -235,6 +235,60 @@ Implementar:
 
 ---
 
+## Ejercicio 4b — Listas: más operaciones ⭐⭐⭐
+
+Usando el mismo tipo del ejercicio anterior:
+
+```pascal
+uses GenericLinkedList;
+type
+  ListaE = specialize LinkedList<integer>;
+```
+
+Implementar:
+
+1. `function contarMayoresQue(L: ListaE; umbral: integer): integer` — cantidad de elementos estrictamente mayores que `umbral`
+2. `function maximo(L: ListaE): integer` — devuelve el mayor elemento (asumir que la lista no está vacía)
+
+!!! question "Para pensar"
+    - ¿Cómo iniciás el `maximo` antes de entrar al while? ¿Con `0`? ¿Con el primer elemento?
+    - ¿Cuál de las dos funciones necesitaría cambio si la lista pudiera estar vacía?
+
+??? success "✅ Solución"
+    ```pascal
+    function contarMayoresQue(L: ListaE; umbral: integer): integer;
+    var cant: integer;
+    begin
+      cant := 0;
+      L.reset();
+      while not L.eol() do
+      begin
+        if L.current() > umbral then
+          cant := cant + 1;
+        L.next();
+      end;
+      contarMayoresQue := cant;
+    end;
+
+    function maximo(L: ListaE): integer;
+    var max: integer;
+    begin
+      L.reset();
+      max := L.current();   { primer elemento como valor inicial }
+      L.next();
+      while not L.eol() do
+      begin
+        if L.current() > max then
+          max := L.current();
+        L.next();
+      end;
+      maximo := max;
+    end;
+    ```
+    `maximo` se inicializa con `L.current()` (primer elemento), no con `0`. Si se iniciara con `0` y todos los elementos fueran negativos, el resultado sería incorrecto.
+
+---
+
 ## Ejercicio 5 — Corte de Control ⭐⭐⭐
 
 Se dispone de inmuebles **ordenados por localidad**. Cada línea tiene: localidad (string) y precio (real). La entrada termina con `'FIN'`.
@@ -404,3 +458,165 @@ Total general: $ 680000.00
     ```
     `armarLista` lleva `var L` porque ejecuta `ListaInmuebles.create()`.
     `cortePorLocalidad` no lleva `var` porque solo recorre — no reasigna `L`.
+
+---
+
+## Ejercicio 7 — Vectores: ordenar y buscar ⭐⭐⭐
+
+```pascal
+const MAX = 100;
+type
+  TVector = array[1..MAX] of integer;
+```
+
+1. Implementar `procedure seleccion(var v: TVector; n: integer)` que ordene el vector de menor a mayor usando ordenación por selección.
+2. Implementar `function buscarOrdenado(v: TVector; n, x: integer): boolean` que busque `x` en el vector **ya ordenado**, deteniéndose en cuanto sepa que no puede estar.
+
+**Datos de prueba:**
+```
+n = 6,  v = [64, 25, 12, 45, 8, 30]
+Después de ordenar: [8, 12, 25, 30, 45, 64]
+buscarOrdenado(v, 6, 25) → true
+buscarOrdenado(v, 6, 40) → false
+```
+
+!!! question "Para pensar"
+    - ¿Cuántas iteraciones hace el `for` externo de selección?
+    - ¿En qué condición la búsqueda con orden puede parar antes de llegar al final?
+    - ¿Por qué `v` lleva `var` en `seleccion` pero no en `buscarOrdenado`?
+
+??? success "✅ Solución"
+    ```pascal
+    procedure seleccion(var v: TVector; n: integer);
+    var
+      i, j, iMin, aux: integer;
+    begin
+      for i := 1 to n - 1 do
+      begin
+        iMin := i;
+        for j := i + 1 to n do
+          if v[j] < v[iMin] then
+            iMin := j;
+        aux     := v[i];
+        v[i]    := v[iMin];
+        v[iMin] := aux;
+      end;
+    end;
+
+    function buscarOrdenado(v: TVector; n, x: integer): boolean;
+    var
+      i        : integer;
+      encontrado: boolean;
+      superado  : boolean;
+    begin
+      i         := 1;
+      encontrado := false;
+      superado   := false;
+      while (i <= n) and (not encontrado) and (not superado) do
+      begin
+        if v[i] = x then
+          encontrado := true
+        else if v[i] > x then
+          superado := true    { el vector está ordenado: ya no puede estar }
+        else
+          i := i + 1;
+      end;
+      buscarOrdenado := encontrado;
+    end;
+    ```
+    `seleccion` necesita `var v` porque modifica el contenido del vector. `buscarOrdenado` no modifica nada — solo lee.
+
+---
+
+## Ejercicio 8 — Empleados con lista ⭐⭐⭐⭐
+
+Definir:
+
+```pascal
+uses GenericLinkedList;
+
+type
+  TEmpleado = record
+    nombre   : string;
+    categoria: char;    { 'A', 'B', 'C', 'D' o 'E' }
+    salario  : real;
+  end;
+  ListaEmpleados = specialize LinkedList<TEmpleado>;
+```
+
+Implementar:
+
+1. `procedure armarLista(var L: ListaEmpleados)` — lee empleados hasta que `nombre = 'FIN'`
+2. `function contarCategoria(L: ListaEmpleados; cat: char): integer` — cuántos empleados tienen esa categoría
+3. `function salarioMaximo(L: ListaEmpleados): real` — devuelve el mayor salario (asumir lista no vacía)
+
+**Entrada de ejemplo:**
+```
+Ana A 85000
+Carlos B 72000
+Laura A 91000
+Pedro C 60000
+FIN X 0
+```
+
+**Salida esperada (usando los tres módulos):**
+```
+Empleados categoría A: 2
+Salario máximo: $ 91000.00
+```
+
+!!! question "Para pensar"
+    - ¿Por qué `armarLista` necesita `var L` y los otros dos no?
+    - ¿Cómo inicializás `salarioMaximo` antes del while? ¿Con `0`? ¿Con `L.current().salario`?
+    - ¿Qué pasa si pasás `'A'` a `contarCategoria` dos veces? ¿El resultado cambia? ¿Por qué?
+
+??? success "✅ Solución"
+    ```pascal
+    procedure armarLista(var L: ListaEmpleados);
+    var emp: TEmpleado;
+    begin
+      L := ListaEmpleados.create();
+      readln(emp.nombre, emp.categoria, emp.salario);
+      while emp.nombre <> 'FIN' do
+      begin
+        L.add(emp);
+        readln(emp.nombre, emp.categoria, emp.salario);
+      end;
+    end;
+
+    function contarCategoria(L: ListaEmpleados; cat: char): integer;
+    var
+      cant: integer;
+      emp : TEmpleado;
+    begin
+      cant := 0;
+      L.reset();
+      while not L.eol() do
+      begin
+        emp := L.current();
+        if emp.categoria = cat then
+          cant := cant + 1;
+        L.next();
+      end;
+      contarCategoria := cant;
+    end;
+
+    function salarioMaximo(L: ListaEmpleados): real;
+    var
+      max: real;
+      emp: TEmpleado;
+    begin
+      L.reset();
+      max := L.current().salario;   { primer elemento como máximo inicial }
+      L.next();
+      while not L.eol() do
+      begin
+        emp := L.current();
+        if emp.salario > max then
+          max := emp.salario;
+        L.next();
+      end;
+      salarioMaximo := max;
+    end;
+    ```
+    La segunda llamada a `contarCategoria` funciona igual: como no se modifica `L` ni se reasigna, el cursor interno queda en el estado que dejó la primera llamada... ¡pero `L.reset()` lo vuelve a poner al principio al inicio de cada llamada! Eso es exactamente por qué siempre se llama `reset()` al comenzar un recorrido.

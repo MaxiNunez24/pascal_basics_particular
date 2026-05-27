@@ -14,6 +14,37 @@ A diferencia de los vectores, las listas no tienen tamaño fijo: crecen y se ach
 
 ---
 
+## ¿Cómo es una lista por dentro?
+
+Aunque `GenericLinkedList` oculta los detalles, internamente cada lista es una cadena de **nodos** en el heap. Cada nodo tiene dos cosas: el dato y un puntero al siguiente nodo.
+
+```mermaid
+graph LR
+    lista["L (variable)"] --> n1
+
+    subgraph heap
+        n1["valor: 10\nsiguiente: ●"] -->|"●"| n2["valor: 20\nsiguiente: ●"] -->|"●"| n3["valor: 30\nsiguiente: nil"]
+    end
+
+    style heap fill:#f0f4ff,stroke:#99b
+```
+
+- El **último nodo** apunta a `nil` — ahí sabe `eol()` que terminó.
+- No hay índices: para llegar al nodo 5 hay que atravesar los 4 anteriores. Por eso el recorrido es obligatoriamente secuencial.
+- Cada llamada a `add()` crea un nuevo nodo en el heap y lo enlaza al final.
+
+!!! info "reset / eol / current / next — traducción interna"
+    | Llamada en Pascal | Lo que hace la librería por dentro |
+    |---|---|
+    | `L.reset()` | Apunta el cursor al primer nodo |
+    | `L.eol()` | Pregunta si el cursor llegó a `nil` |
+    | `L.current()` | Devuelve el dato del nodo apuntado por el cursor |
+    | `L.next()` | Avanza el cursor al siguiente nodo |
+
+→ [Ver en Python Tutor cómo se construye el heap](../pythontutor/pythontutor.md#listas-enlazadas)
+
+---
+
 ## La librería GenericLinkedList
 
 En AyPI UNLP las listas se trabajan con la librería `GenericLinkedList`. Ella provee la estructura y los métodos — no hace falta manejar punteros manualmente.
