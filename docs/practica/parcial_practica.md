@@ -1,6 +1,6 @@
 # 🎯 Práctica de Parcial — StreamMusic
 
-Ejercicio al estilo del parcial real. Intentá resolverlo completo antes de ver las pistas.
+Ejercicio al estilo del parcial real. Intentá resolver cada ítem antes de abrir las pistas.
 
 ---
 
@@ -23,41 +23,19 @@ end.
 ```
 
 !!! tip "Antes de codear: leé el programa principal"
-    Las firmas de los módulos están implícitas en cómo se usan. Por ejemplo:
-    `writeln(elementosModificados(...))` → `elementosModificados` es una **función** que devuelve un entero.
+    Las firmas de los módulos están implícitas en cómo se usan.
+    ¿Qué te dice el `writeln(elementosModificados(...))` sobre ese módulo?
 
 ---
 
 ## Declarar los tipos — empezá por acá
 
-Definí todos los tipos necesarios. ¿Cuántos registros distintos hacen falta? ¿Cuántas listas?
+Definí todos los tipos necesarios antes de arrancar con los ítems.
 
-??? tip "💡 Pista — tipos"
-    ```pascal
-    uses GenericLinkedList;
-    const MAX = 500;
-    type
-      TPlaylist = record
-        codigo, tipo, canciones: integer;
-        usuario, pais: string;
-      end;
-      TVectorP = array[1..MAX] of TPlaylist;
-
-      { Para la lista del ítem a }
-      TInfoPlaylist = record
-        usuario  : string;
-        canciones: integer;
-      end;
-      ListaInfo = specialize LinkedList<TInfoPlaylist>;
-
-      { Para el ítem b }
-      TTipoTotal = record
-        tipo, total: integer;
-      end;
-      ListaTipos = specialize LinkedList<TTipoTotal>;
-
-      TContador = array[1..8] of integer;
-    ```
+??? question "💡 Pista — tipos"
+    - ¿Cuántos registros distintos necesitás? Pensá uno por cada "cosa" que guardás.
+    - La lista del ítem a, ¿guarda toda la información de la playlist o solo parte?
+    - El ítem b trabaja con tipos 1..8 — ¿qué estructura conocés que se indexe con un rango fijo?
 
 ---
 
@@ -70,15 +48,15 @@ Implementá un módulo que reciba el vector y genere una lista que contenga el *
 La lista debe quedar ordenada por cantidad de canciones favoritas de manera **descendente**.
 
 !!! question "Para pensar antes de codear"
-    - ¿Va `var` en el vector? ¿Y en la lista?
-    - ¿Cómo expresás "código par" en Pascal?
-    - ¿Cómo ordenás descendente con selección? ¿Buscás el mínimo o el máximo?
-    - ¿GenericLinkedList te deja insertar en el medio? ¿Qué estrategia usás entonces?
+    - ¿El módulo lee el vector o lo modifica? ¿Necesita `var`?
+    - ¿El módulo crea la lista o solo la usa? ¿Necesita `var`?
+    - ¿Cómo expresás "número par" en Pascal con un operador que ya conocés?
+    - ¿GenericLinkedList te permite insertar en el medio de la lista? Si no, ¿cómo resolvés el orden?
 
-??? tip "💡 Estrategia"
-    1. Recorrer el vector y copiar los que cumplen la condición a un **vector auxiliar**
-    2. Ordenar ese vector auxiliar **descendente** con selección (encontrar el máximo en cada pasada)
-    3. Construir la lista recorriendo el vector auxiliar ordenado con `add`
+??? question "💡 Pista — ordenar descendente"
+    - Ya sabés ordenar ascendente con selección buscando el mínimo en cada pasada.
+    - ¿Qué cambiaría si en vez del mínimo buscaras el máximo?
+    - ¿Cómo podrías ordenar primero y después construir la lista, usando una estructura que ya conocés?
 
 ??? success "✅ Solución"
     ```pascal
@@ -124,13 +102,14 @@ La lista debe quedar ordenada por cantidad de canciones favoritas de manera **de
 
 Implementá un módulo que reciba el **vector original** y encuentre los **2 tipos de playlist** (valores 1..8) que acumulan la mayor cantidad de canciones favoritas totales. El resultado debe quedar ordenado descendentemente.
 
-!!! question "Para pensar"
-    - ¿Qué estructura usás para acumular canciones por tipo? ¿Un vector de 8 posiciones?
-    - ¿Cómo encontrás los 2 mayores en un solo recorrido?
+!!! question "Para pensar antes de codear"
+    - Hay 8 tipos posibles. ¿Qué estructura te permite acumular un total por cada tipo usando el tipo como índice directamente?
+    - Una vez que tenés los totales por tipo, ¿cómo encontrás los 2 más altos? ¿Necesitás recorrer dos veces?
+    - ¿Con qué valor inicializás los "máximos" antes de empezar a compararlos?
 
-??? tip "💡 Estrategia"
-    - Vector contador `cont[1..8]`: acumular `v[i].canciones` en `cont[v[i].tipo]`
-    - Un `for` de 1 a 8 con dos variables (`max1`/`max2`) para encontrar el top 2
+??? question "💡 Pista — top 2"
+    - Imaginá que tenés solo el máximo. ¿Cómo lo harías con una variable `max` y un `for`?
+    - Ahora pensá: cuando encontrás un nuevo máximo, ¿qué pasa con el que era el máximo antes?
 
 ??? success "✅ Solución"
     ```pascal
@@ -175,20 +154,15 @@ Implementá un módulo que reciba la **lista del ítem a**, un **nombre de usuar
 Para cada playlist de la lista cuyo usuario coincida con el nombre recibido, sumá el valor a la cantidad de canciones.  
 **Retorná** la cantidad de elementos modificados.
 
-!!! danger "Trampa — GenericLinkedList no tiene replace"
-    `L.current()` devuelve una **copia** del elemento. Modificar esa copia no cambia la lista.
-
-    ```pascal
-    { ❌ Esto NO modifica la lista }
-    info := L.current();
-    info.canciones := info.canciones + valor;  { solo modifica la copia local }
-    ```
-
-    Solución: **reconstruir la lista** con los elementos ya modificados.
-
-!!! question "Para pensar"
+!!! question "Para pensar antes de codear"
     - ¿Es función o procedimiento? ¿Cómo lo sabés mirando el programa principal?
-    - ¿Necesita `var L`? ¿Por qué?
+    - ¿El módulo necesita `var L`? Pensá: ¿qué operación hace sobre `L` que no es solo recorrerla?
+    - Cuando hacés `info := L.current()` y modificás `info`, ¿estás modificando la lista o una copia?
+    - Si no podés modificar un elemento "en el lugar", ¿cómo podrías construir la lista con los cambios ya aplicados?
+
+??? question "💡 Pista — modificar elementos"
+    - Hacé la prueba mental: después de `info := L.current(); info.canciones := info.canciones + valor`, ¿qué tiene `L.current()` todavía?
+    - ¿Qué pasaría si construís una lista nueva, copiás cada elemento (modificado o no) y al final reemplazás `L` con esa lista nueva?
 
 ??? success "✅ Solución"
     ```pascal
