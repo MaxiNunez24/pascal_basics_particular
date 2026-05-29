@@ -57,5 +57,7 @@ nav:
     - 🔗 Listas Enlazadas: clases/04_listas_enlazadas.md
     - ✂️ Corte de Control: clases/05_corte_control.md
   - 🏋️ Ejercicios: ejercicios/ejercicios.md
-  - 🎯 Práctica de Parcial: practica/parcial_practica.md
+  - 🎯 Práctica de Parcial:
+    - StreamMusic: practica/parcial_practica.md
+    - Panini Mundial: practica/parcial_panini.md
   - 🔬 Python Tutor (C): pythontutor/pythontutor.md
